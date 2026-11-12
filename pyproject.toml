@@ -1,0 +1,13 @@
+[project]
+name = "python-as-ai-first-steps"
+version = "0.1.0"
+description = "Python as AI: First Steps, the unified lessons 1 to 4."
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "ipykernel>=7.4.0",
+    "matplotlib>=3.11.2",
+    "pandas>=3.1.1",
+    "requests>=2.34.2",
+    "seaborn>=0.13.2",
+    "wordcloud>=1.9.6",
+]
