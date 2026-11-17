@@ -1,7 +1,7 @@
 [project]
 name = "python-as-ai-first-steps"
 version = "0.1.0"
-description = "Python as AI: First Steps, the unified lessons 1 to 4."
+description = "Lesson 01 of The AI Learning Hub: Python first steps, from basics to pandas and charts."
 requires-python = ">=3.12,<3.13"
 dependencies = [
     "ipykernel>=7.4.0",
@@ -10,4 +10,10 @@ dependencies = [
     "requests>=2.34.2",
     "seaborn>=0.13.2",
     "wordcloud>=1.9.6",
+]
+
+[dependency-groups]
+dev = [
+    "nbclient>=0.11.0",
+    "nbformat>=5.11.1",
 ]

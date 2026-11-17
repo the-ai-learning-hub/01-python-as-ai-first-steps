@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Python as AI: First Steps</title>
-<meta name="description" content="AI for Tech Leaders · Lesson 01 — from raw variables to visual insights.">
+<meta name="description" content="The AI Learning Hub · Lesson 01 — Python first steps: basics, data structures, loops, modules, errors, classes, pandas and charts.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -21,7 +21,7 @@
   --mono:"JetBrains Mono",ui-monospace,Consolas,"SF Mono",monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-code,code *,pre,pre *,.term,.term *,table.df,table.df *,.kv *,.idx *,.bars *,.esc,svg text{font-variant-ligatures:none!important;font-feature-settings:"liga" 0,"calt" 0!important}
+code,code *,pre,pre *,.term,.term *,table.df,table.df *,table.t td.m,.kv,.kv *,.idx *,.bars *,.esc,svg text{font-variant-ligatures:none!important;font-feature-settings:"liga" 0,"calt" 0!important}
 html,body{height:100%;background:var(--page);color:var(--ink);font-family:var(--sans);overflow:hidden}
 .deck{position:fixed;inset:0;display:grid;place-items:center}
 .slide{position:absolute;width:1280px;height:720px;background:var(--slide);border:1px solid var(--line);
@@ -112,6 +112,7 @@ table.df th{color:var(--ink);font-weight:700;text-align:right;padding:4px 9px;bo
 table.df td{color:var(--body);text-align:right;padding:3.5px 9px}
 table.df td:first-child,table.df th:first-child{text-align:left;color:var(--dim)}
 table.df tr:nth-child(even) td{background:rgba(255,255,255,.025)}
+table.df td.nan{color:var(--red)}
 
 /* cover */
 .cover{display:grid;grid-template-columns:1.25fr .95fr;gap:44px;align-items:center;height:100%}
@@ -155,6 +156,7 @@ table.df tr:nth-child(even) td{background:rgba(255,255,255,.025)}
 .kv .a{color:var(--dim)}
 .kv .val{background:var(--term);border:1px solid var(--line2);border-radius:6px;padding:8px 12px;color:var(--ink)}
 .kv .val em{color:var(--yellow);font-style:normal;margin-left:8px;font-size:12px}
+.kv.tight{gap:7px 12px;font-size:13.5px}.kv.tight .k,.kv.tight .val{padding:6px 10px}
 .flow{display:flex;align-items:stretch;gap:0}
 .flow .s{flex:1;background:var(--card);border:1px solid var(--line);padding:42px 22px 40px;clip-path:polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%,18px 50%);margin-left:-6px}
 .flow .s:first-child{clip-path:polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%);margin-left:0;background:var(--yellow)}
@@ -176,6 +178,66 @@ table.df tr:nth-child(even) td{background:rgba(255,255,255,.025)}
 .figs img{max-height:470px;max-width:100%;border-radius:8px;background:#fff;object-fit:contain}
 .figs figure{display:flex;flex-direction:column;align-items:center;gap:10px;min-height:0}
 .figs figcaption{font-size:14px;color:var(--muted);text-align:center;max-width:520px}
+.steps.six{grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:14px 18px}
+.steps.six .step{padding:16px 18px;gap:6px}
+.steps.six .step .big{font-size:30px}
+.steps.six .step .verb{font-size:19px}
+.steps.six .step .q{font-size:14.5px}
+.steps.six.wrap .step .body{font-size:15px;line-height:1.4}
+.steps.six.wrap .step .q{margin-top:auto;font-size:13.5px;color:var(--ink)}
+.tracker.six .t{padding:5px 0;font-size:15px}
+.tracker.six .dot{width:30px;height:30px}
+.nb{margin-top:14px;font:500 12px var(--mono);color:var(--acc);letter-spacing:.03em}
+.nb span{color:var(--ink)}
+.nb a,.lnk{color:var(--yellow);text-decoration:none;border-bottom:1px dashed currentColor}
+a.pill{text-decoration:none;text-transform:none;letter-spacing:.02em}
+
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:0 44px}
+.gloss>div{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line)}
+.gloss dt{font:800 19px var(--sans);color:var(--yellow);letter-spacing:-.01em}
+.gloss dd{font-size:16.5px;line-height:1.45;color:var(--body)}
+
+/* why-basics: the agent moment */
+.chat{display:flex;flex-direction:column;gap:14px}
+.msg{max-width:92%;border-radius:16px;padding:14px 18px;font-size:18px;line-height:1.45}
+.msg .who{display:block;font:700 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;opacity:.75}
+.msg.you{align-self:flex-end;background:#24406b;color:var(--ink);border-bottom-right-radius:4px}
+.msg.bot{align-self:flex-start;background:var(--card);border:1px solid var(--line2);color:var(--body);border-bottom-left-radius:4px;width:92%}
+.msg .cmd{margin-top:12px;box-shadow:none}
+.msg .cmd pre{font-size:15px;padding:12px 16px;white-space:pre}
+.bad-line{display:inline-block;border-radius:4px;padding:0 4px;margin-left:-4px;transition:background .5s ease,color .5s ease,box-shadow .5s ease}
+.slide.active .bad-line{background:rgba(255,122,122,.18);color:#ffb3b3;box-shadow:inset 3px 0 0 var(--red);transition-delay:2.3s}
+.alarm{border:1px solid rgba(255,122,122,.5);background:rgba(255,122,122,.1);border-radius:12px;padding:12px 16px;font-size:16.5px;line-height:1.45;color:var(--ink);
+  opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
+.alarm b{color:var(--red)}
+.slide.active .alarm{opacity:1;transform:none;transition-delay:2.8s}
+.approve{font:500 15px var(--mono);color:var(--muted);display:flex;align-items:center;gap:8px;opacity:0;transition:opacity .5s ease}
+.slide.active .approve{opacity:1;transition-delay:3.3s}
+.approve .key{display:inline-grid;place-items:center;min-width:28px;height:28px;border-radius:6px;border:1px solid var(--line2);color:var(--body)}
+.approve .key.no{background:var(--yellow);color:#1a1606;border-color:var(--yellow);font-weight:700}
+.risks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:auto 0}
+.risk{border-top:4px solid var(--acc);background:linear-gradient(180deg,color-mix(in srgb,var(--acc) 9%,var(--card)),var(--card) 60%);border-radius:4px 4px 14px 14px;padding:26px 24px 22px;min-height:360px;display:flex;flex-direction:column;gap:12px}
+.risk .ico{font-size:52px;line-height:1;margin-bottom:4px}
+.risk h3{font:800 27px/1.15 var(--sans);letter-spacing:-.015em;color:var(--ink)}
+.risk p{font-size:18px;line-height:1.5;color:var(--body);min-height:5.6em}
+.risk .term{margin-top:auto;box-shadow:none}
+.risk .term pre{font-size:14px;padding:12px 14px}
+.checks{display:grid;gap:10px;flex:1;margin-bottom:20px;align-content:start}
+.check{display:grid;grid-template-columns:30px 1fr auto;gap:18px;align-items:center;padding:15px 22px;border-radius:12px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc)}
+.check .box{width:26px;height:26px;border-radius:7px;border:2px solid var(--acc);position:relative}
+.check .box::after{content:"";position:absolute;left:7px;top:2px;width:7px;height:13px;border:solid var(--acc);border-width:0 3px 3px 0;transform:rotate(45deg) scale(0);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.slide.active .check .box::after{transform:rotate(45deg) scale(1)}
+.slide.active .check:nth-child(1) .box::after{transition-delay:.7s}.slide.active .check:nth-child(2) .box::after{transition-delay:.95s}
+.slide.active .check:nth-child(3) .box::after{transition-delay:1.2s}.slide.active .check:nth-child(4) .box::after{transition-delay:1.45s}
+.slide.active .check:nth-child(5) .box::after{transition-delay:1.7s}
+.check b{display:block;font:800 21px/1.2 var(--sans);color:var(--ink);letter-spacing:-.01em}
+.check div span{font-size:16px;color:var(--body)}
+.check em{font:500 12px var(--mono);font-style:normal;color:var(--acc);white-space:nowrap}
+@media (prefers-reduced-motion: reduce){.alarm,.approve{opacity:1!important;transform:none!important;transition:none!important}
+  .bad-line{background:rgba(255,122,122,.18)!important;color:#ffb3b3!important;box-shadow:inset 3px 0 0 var(--red)!important}
+  .check .box::after{transform:rotate(45deg) scale(1)!important;transition:none!important}}
+@media print{.alarm,.approve{opacity:1!important;transform:none!important}.check .box::after{transform:rotate(45deg) scale(1)!important}
+  .bad-line{background:rgba(255,122,122,.18)!important;color:#ffb3b3!important}}
 
 /* chrome */
 .ui{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;gap:10px;padding:10px;
@@ -200,7 +262,7 @@ body:hover .ui{opacity:1}
 }
 
 /* ===================== Python theme & motion ===================== */
-:root{--m1:#5ba4e6;--m2:#ffd43b;--m3:#8fc8ff;--m4:#ffb547}
+:root{--m1:#9bd67e;--m2:#5ba4e6;--m3:#ffd43b;--m4:#c4a2ff;--m5:#8fc8ff;--m6:#ffb547}
 .slide{transform:scale(var(--s,1)) translateY(var(--ty,16px));transition:opacity .55s ease,transform .75s cubic-bezier(.2,.7,.2,1)}
 .slide.active{--ty:0px}
 .slide::before{content:"";position:absolute;inset:-25%;pointer-events:none;z-index:0;
@@ -283,54 +345,133 @@ pre.py .ln{opacity:0;transform:translateX(-10px);transition:opacity .35s ease,tr
 <main class="deck" id="deck">
 
 <!-- ================================================= 01 COVER -->
-<section class="slide" data-mod="Python as AI · First Steps">
+<section class="slide" data-mod="Python · First Steps">
   <canvas class="rain soft" data-set="0" aria-hidden="true"></canvas>
   <div class="main">
     <div class="cover">
       <div>
-        <div class="kicker">AI for Tech Leaders<span class="sep">·</span>Lesson 01</div>
-        <h1>From <span class="hl">raw variables</span> to <span class="hl">visual</span> insights</h1>
-        <p class="lead">Store data, automate the repetition, work with tables at scale and chart what matters. Built for leaders who build, buy or approve AI. No developer background needed.</p>
+        <div class="kicker">The AI Learning Hub<span class="sep">·</span>Lesson 01</div>
+        <h1>Python: <span class="hl">first steps</span> to <span class="hl">real data</span></h1>
+        <p class="lead">From your first variable to your first chart. Learn the Python every AI project is built on: basics, data structures, loops, reusable code, tables and charts. No programming experience needed.</p>
         <div class="pills">
-          <span class="pill">Python</span><span class="pill">Data structures</span><span class="pill">Loops</span>
-          <span class="pill">Pandas</span><span class="pill">Seaborn</span><span class="pill y">4 modules</span>
+          <span class="pill">Basics</span><span class="pill">Data structures</span><span class="pill">Loops</span><span class="pill">Classes</span>
+          <span class="pill">Pandas</span><span class="pill">Seaborn</span><span class="pill y">6 modules</span>
         </div>
       </div>
       <div>
         <div class="term out">
           <div class="bar"><i></i><i></i><i></i><span>terminal</span></div>
 <pre><span class="p">&gt;</span> <span class="type">uv run first_steps.py</span>
-<span class="tl" style="--td:1.8s;color:var(--yellow)">What will we do with the data?</span>
-<span class="tl" style="--td:2.3s"><span class="boxed">store → repeat → tabulate → show</span></span>
-<span class="tl" style="--td:2.8s"><span class="p">&gt;</span> <span class="cursor"></span></span></pre>
+<span class="tl" style="--td:1.8s;color:var(--yellow)">What will we learn today?</span>
+<span class="tl" style="--td:2.3s"><span class="boxed" style="font-size:14px">basics → store → repeat → reuse</span></span>
+<span class="tl" style="--td:2.6s"><span class="boxed" style="font-size:14px">→ tabulate → show</span></span>
+<span class="tl" style="--td:3.0s"><span class="p">&gt;</span> <span class="cursor"></span></span></pre>
         </div>
         <div class="caption">↳ by Diogo Freitas &amp; João Francisco Botas</div>
       </div>
     </div>
   </div>
-  <aside class="notes">Welcome. This is one continuous journey in four moves: store data, repeat logic, tabulate at scale, and show the insight. The goal is fluency, not developer skills: enough to build, evaluate and challenge AI and data work.</aside>
+  <aside class="notes">Welcome to Lesson 01. In Lesson 00 you installed uv, VS Code and Python and ran your first program. Now we learn the language itself, in six moves: the basics, storing data, repeating work, reusing code, working with tables and showing results as charts. Every module has a notebook with examples and exercises.</aside>
+</section>
+
+<!-- ================================================= WHY BASICS · THE AGENT MOMENT -->
+<section class="slide" data-mod="Why learn the basics" data-id="why">
+  <div class="main">
+    <div class="cols" style="grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center;height:100%">
+      <div class="stack" style="gap:22px">
+        <h2 style="font-size:52px">AI can write the code. <span class="hl">You decide if it runs.</span></h2>
+        <p class="lead">An AI agent types fast and always sounds sure. But the code it writes runs on <strong>your</strong> computer, with <strong>your</strong> files and <strong>your</strong> data.</p>
+        <p class="lead">If you can't read the code, you can't tell a good answer from a disaster.</p>
+      </div>
+      <div class="chat">
+        <div class="msg you"><span class="who">You</span>Clean up the customers who left last year.</div>
+        <div class="msg bot"><span class="who">AI agent</span>Sure! I'll run this for you:
+          <div class="term cmd"><pre><span class="ok-line">import sqlite3</span>
+<span class="ok-line">db = sqlite3.connect("shop.db")</span>
+<span class="bad-line">db.execute("DELETE FROM customers")</span></pre></div>
+        </div>
+        <div class="alarm"><b>Read it before you approve.</b> There is no "who left last year" in that line. It deletes <strong>every</strong> customer.</div>
+        <div class="approve">Run this command? <span class="key">y</span> / <span class="key no">N</span> <span class="cursor"></span></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Start with a story. You ask an AI agent to remove old customers. It answers instantly and confidently, and the code looks reasonable. But the last line has no condition: it deletes every customer in the database. The agent did not lie, it just got it wrong. The only protection is a person who can read three lines of Python and say no. That is why we learn the basics.</aside>
+</section>
+
+<section class="slide" data-mod="Why learn the basics">
+  <div class="main">
+    <div class="head">
+      <h2>Three ways <span class="hl">code can go wrong</span> without warning</h2>
+    </div>
+    <div class="risks">
+      <div class="risk" style="--acc:var(--red)">
+        <div class="ico">🗑️</div>
+        <h3>It deletes or overwrites</h3>
+        <p>One line can erase a database, a folder or yesterday's spreadsheet. Often there is no undo.</p>
+        <div class="term xs"><pre class="py"># replaces yesterday's file
+df.to_csv("sales.csv")</pre></div>
+      </div>
+      <div class="risk" style="--acc:var(--yellow)">
+        <div class="ico">⏳</div>
+        <h3>It never stops</h3>
+        <p>A loop without an exit runs all night, or calls a paid service a million times. Then the bill arrives.</p>
+        <div class="term xs"><pre class="py">while True:
+    ask_the_ai(question)</pre></div>
+      </div>
+      <div class="risk" style="--acc:var(--blue)">
+        <div class="ico">🎭</div>
+        <h3>It is confidently wrong</h3>
+        <p>No error, no warning, just a wrong answer that looks right. The most dangerous kind.</p>
+        <div class="term xs"><pre class="py"># gives "55", not 10
+"5" + "5"</pre></div>
+      </div>
+    </div>
+    <div class="call t"><span class="tag">TAKEAWAY</span><div>None of these crash. The computer does exactly what the code says. Knowing the basics is how you spot it <strong>before</strong> it happens.</div></div>
+  </div>
+  <aside class="notes">Three simple examples, one per risk. Writing a file with the same name silently replaces it. A loop with no way out keeps going, and if every pass costs money, so does the mistake. And text plus text is joined, not added: the program runs happily and gives the wrong number. You will understand each of these lines by the end of this lesson.</aside>
+</section>
+
+<section class="slide" data-mod="Why learn the basics">
+  <div class="main">
+    <div class="head">
+      <h2>Before you press Enter, <span class="hl">ask five questions</span></h2>
+    </div>
+    <div class="checks">
+      <div class="check" style="--acc:var(--m1)"><span class="box"></span><div><b>What does it do?</b><span>Read the functions it calls and what they return.</span></div><em>Module 01</em></div>
+      <div class="check" style="--acc:var(--m2)"><span class="box"></span><div><b>What data does it touch?</b><span>Which files, tables or folders does it read or change?</span></div><em>Modules 02 · 05</em></div>
+      <div class="check" style="--acc:var(--red)"><span class="box"></span><div><b>Can it delete or overwrite?</b><span>If yes, make a copy first. Always.</span></div><em>Module 06</em></div>
+      <div class="check" style="--acc:var(--m3)"><span class="box"></span><div><b>How long will it run?</b><span>Is there a loop? Does it always reach the end?</span></div><em>Module 03</em></div>
+      <div class="check" style="--acc:var(--m4)"><span class="box"></span><div><b>What happens if it fails?</b><span>Will you see a clear error, or a silent wrong result?</span></div><em>Module 04</em></div>
+    </div>
+    <div class="call g"><span class="tag">REMEMBER</span><div>You don't need to <strong>write</strong> every line yourself. You need to <strong>understand</strong> every line you run.</div></div>
+  </div>
+  <aside class="notes">This is the checklist to keep for the rest of your life with AI tools. Each question maps to a module of today's lesson, so by the end you will be able to answer all five. Make a habit of it: pause, read, then approve.</aside>
 </section>
 
 <!-- ================================================= 02 JOURNEY -->
-<section class="slide" data-mod="The journey">
+<section class="slide" data-mod="The journey" data-id="journey">
   <div class="main">
     <div class="head">
       <div class="kicker">00<span class="sep">·</span>The journey</div>
-      <h2>Four moves turn <span class="hl">raw data</span> into a decision</h2>
+      <h2>Six moves take you from <span class="hl">a variable</span> to a chart</h2>
     </div>
-    <div class="steps" style="flex:1;margin-bottom:22px">
-      <div class="step" style="--acc:var(--m1)"><div class="big">01</div><div class="verb">Store</div><div class="mod">Data Structures</div>
+    <div class="steps six" style="flex:1;margin-bottom:20px">
+      <div class="step" style="--acc:var(--m1)"><div class="big">01</div><div class="verb">Basics</div><div class="mod">Python Basics</div>
+        <div class="q">How do I tell Python what to do?</div><div class="tags">variables · types · functions · if</div><span class="arr">→</span></div>
+      <div class="step" style="--acc:var(--m2)"><div class="big">02</div><div class="verb">Store</div><div class="mod">Data Structures</div>
         <div class="q">How is data stored in Python?</div><div class="tags">list · tuple · set · dict</div><span class="arr">→</span></div>
-      <div class="step" style="--acc:var(--m2)"><div class="big">02</div><div class="verb">Repeat</div><div class="mod">Loops</div>
-        <div class="q">How do we automate repetition?</div><div class="tags">while · for</div><span class="arr">→</span></div>
-      <div class="step" style="--acc:var(--m3)"><div class="big">03</div><div class="verb">Tabulate</div><div class="mod">Pandas</div>
+      <div class="step" style="--acc:var(--m3)"><div class="big">03</div><div class="verb">Repeat</div><div class="mod">Loops</div>
+        <div class="q">How do we automate repetition?</div><div class="tags">while · for · comprehensions</div></div>
+      <div class="step" style="--acc:var(--m4)"><div class="big">04</div><div class="verb">Reuse</div><div class="mod">Modules · Errors · Classes</div>
+        <div class="q">How do we reuse and protect code?</div><div class="tags">import · try/except · class</div><span class="arr">→</span></div>
+      <div class="step" style="--acc:var(--m5)"><div class="big">05</div><div class="verb">Tabulate</div><div class="mod">Pandas</div>
         <div class="q">How do we work with tables at scale?</div><div class="tags">Series · DataFrame</div><span class="arr">→</span></div>
-      <div class="step" style="--acc:var(--m4)"><div class="big">04</div><div class="verb">Show</div><div class="mod">Data Visualization</div>
-        <div class="q">How do we make the insight obvious?</div><div class="tags">Matplotlib · Seaborn</div></div>
+      <div class="step" style="--acc:var(--m6)"><div class="big">06</div><div class="verb">Show</div><div class="mod">Data Visualization</div>
+        <div class="q">How do we make the result obvious?</div><div class="tags">Matplotlib · Seaborn</div></div>
     </div>
-    <div class="call t"><span class="tag">TAKEAWAY</span><div>Each module answers the question the previous one leaves open, so by the end one dataset travels from a raw variable to a chart a board can act on.</div></div>
+    <div class="call t"><span class="tag">TAKEAWAY</span><div>Each module answers the question the previous one leaves open. By the end, you take raw data from a file to a clear chart, writing every step yourself.</div></div>
   </div>
-  <aside class="notes">Here is the whole map: Store, Repeat, Tabulate, Show. Every module ends with an open question that the next one answers. We come back to this map at every section divider.</aside>
+  <aside class="notes">Here is the whole map: Basics, Store, Repeat, Reuse, Tabulate, Show. Every module ends with an open question that the next one answers, and every module has its own notebook in the repository. We come back to this map at every section divider.</aside>
 </section>
 
 <!-- ================================================= 03 WHY -->
@@ -338,51 +479,285 @@ pre.py .ln{opacity:0;transform:translateX(-10px);transition:opacity .35s ease,tr
   <div class="main">
     <div class="head">
       <div class="kicker">00<span class="sep">·</span>Why it matters</div>
-      <h2>Every AI product runs on <span class="hl">these same four moves</span></h2>
+      <h2>Python is the <span class="hl">language of AI</span>, and it starts here</h2>
     </div>
     <table class="t" style="margin-bottom:auto">
-      <thead><tr><th style="width:290px">The move</th><th>Where you meet it in AI work</th></tr></thead>
+      <thead><tr><th style="width:310px">The move</th><th>Where you will meet it in AI and data work</th></tr></thead>
       <tbody>
-        <tr><td class="m"><b style="color:var(--m1)">01</b>&nbsp; <b style="color:var(--ink)">Data structures</b></td><td>API payloads and LLM responses arrive as dictionaries and lists (JSON).</td></tr>
-        <tr><td class="m"><b style="color:var(--m2)">02</b>&nbsp; <b style="color:var(--ink)">Loops</b></td><td>Batch scoring, evaluating a model on every test case, retrying a failed API call.</td></tr>
-        <tr><td class="m"><b style="color:var(--m3)">03</b>&nbsp; <b style="color:var(--ink)">Pandas</b></td><td>Cleaning and preparing training data; testing a hypothesis on real numbers in minutes.</td></tr>
-        <tr><td class="m"><b style="color:var(--m4)">04</b>&nbsp; <b style="color:var(--ink)">Visualization</b></td><td>Turning model output into a picture a stakeholder can decide on.</td></tr>
+        <tr><td class="m"><b style="color:var(--m1)">01</b>&nbsp; <b style="color:var(--ink)">Basics</b></td><td>Every prompt is a string, every score a number, every rule an <code class="i">if</code>.</td></tr>
+        <tr><td class="m"><b style="color:var(--m2)">02</b>&nbsp; <b style="color:var(--ink)">Data structures</b></td><td>API payloads and LLM responses arrive as dictionaries and lists (JSON).</td></tr>
+        <tr><td class="m"><b style="color:var(--m3)">03</b>&nbsp; <b style="color:var(--ink)">Loops</b></td><td>Processing every document, evaluating a model on every test case, retrying a failed API call.</td></tr>
+        <tr><td class="m"><b style="color:var(--m4)">04</b>&nbsp; <b style="color:var(--ink)">Modules · Errors · Classes</b></td><td>Every AI library is imported, can fail, and gives you objects: <code class="i">model.fit()</code>.</td></tr>
+        <tr><td class="m"><b style="color:var(--m5)">05</b>&nbsp; <b style="color:var(--ink)">Pandas</b></td><td>Cleaning and preparing training data; checking an idea on real numbers in minutes.</td></tr>
+        <tr><td class="m"><b style="color:var(--m6)">06</b>&nbsp; <b style="color:var(--ink)">Visualization</b></td><td>Turning results into a picture anyone can understand at a glance.</td></tr>
       </tbody>
     </table>
-    <div class="call t"><span class="tag">TAKEAWAY</span><div>You don't need to write production code. You need to see <strong>what the code does to your data</strong>, and know when to challenge it.</div></div>
+    <div class="call t"><span class="tag">TAKEAWAY</span><div>You don't need to memorize everything. Learn <strong>what each piece of code does to your data</strong>, then practise it in the notebooks until it feels natural.</div></div>
   </div>
-  <aside class="notes">Every AI product you will buy, build or approve is these four moves underneath. Understanding them lets you ask sharper questions of vendors and teams.</aside>
+  <aside class="notes">Python is the most used language for AI and data. The six moves of this lesson are exactly what sits underneath every AI project, from a quick analysis to training a model.</aside>
 </section>
 
-<!-- ================================================= 04 DIVIDER 01 -->
-<section class="slide" data-mod="Module 01 · Data Structures" style="--acc:var(--m1)">
+<!-- ================================================= MODULE 01 · BASICS -->
+<section class="slide" data-mod="Module 01 · Python Basics" style="--acc:var(--m1)" data-id="basics">
   <canvas class="rain" data-set="1" aria-hidden="true"></canvas>
   <div class="main">
     <div class="divider">
       <div>
         <div class="mono-num">01</div>
-        <div class="kicker">Module 01 / 04<span class="sep">·</span>Store</div>
+        <div class="kicker" style="color:var(--m1)">Module 01 / 06<span class="sep">·</span>Basics</div>
+        <h1 style="font-size:76px">Python <span class="hl">Basics</span></h1>
+        <p class="lead" style="margin-top:20px">How do I tell Python what to do?</p>
+      </div>
+      <div class="card" style="padding:26px 28px">
+        <div class="label">The journey</div>
+        <div class="tracker" data-stage="1"></div>
+        <div style="margin-top:18px">
+          <div style="font-weight:800;font-size:19px;margin-bottom:8px">Learn the words before the sentences.</div>
+          <p class="body">Variables, types, operators, functions, text and decisions. Five ideas you will use in every line of Python you ever write.</p>
+          <div class="nb">▶ <a href="https://github.com/the-ai-learning-hub/01-python-as-ai-first-steps/tree/main/notebooks/01_Python_Basics" target="_blank" rel="noopener"><span>notebooks/01_Python_Basics</span></a> &nbsp;·&nbsp; 📚 <a href="https://www.w3schools.com/python/python_variables.asp" target="_blank" rel="noopener">W3Schools</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Module one. In Lesson 00 you already used print() and input(). Now we learn the building blocks properly: how Python stores a value, does maths, packages steps into functions, works with text and makes decisions.</aside>
+</section>
+
+<section class="slide" data-mod="Module 01 · Python Basics" style="--acc:var(--m1)">
+  <div class="main">
+    <div class="head">
+      <div class="kicker" style="color:var(--m1)">01<span class="sep">·</span>Basics<span class="sep">/</span>variables &amp; types</div>
+      <h2>A variable is <span class="hl">a name for a value</span></h2>
+    </div>
+    <div class="cols">
+      <div class="stack" style="gap:18px">
+        <p class="lead">Write <code class="i">name = value</code> and Python remembers it. Every value has a <strong>type</strong>, and the type decides what you can do with it.</p>
+        <table class="t">
+          <thead><tr><th>Type</th><th>Example</th><th>Holds</th></tr></thead>
+          <tbody>
+            <tr><td class="m" style="color:var(--f)">int</td><td class="m" style="color:var(--n)">42</td><td>whole numbers</td></tr>
+            <tr><td class="m" style="color:var(--f)">float</td><td class="m" style="color:var(--n)">3.14</td><td>numbers with decimals</td></tr>
+            <tr><td class="m" style="color:var(--f)">str</td><td class="m" style="color:var(--s)">"Hello"</td><td>text</td></tr>
+            <tr><td class="m" style="color:var(--f)">bool</td><td class="m" style="color:var(--n)">True / False</td><td>yes or no</td></tr>
+            <tr><td class="m" style="color:var(--f)">NoneType</td><td class="m" style="color:var(--n)">None</td><td>"no value yet"</td></tr>
+          </tbody>
+        </table>
+        <div class="call g push"><span class="tag">GOTCHA</span><div><code class="i">input()</code> always returns text, so <code class="i">"5" + "5"</code> gives <code class="i">"55"</code>. Convert first: <code class="i">int("5") + 5</code> is <code class="i">10</code>.</div></div>
+      </div>
+      <div class="stack">
+        <div class="term sm"><div class="bar"><i></i><i></i><i></i><span>01_basics.py</span></div>
+<pre class="py numbered">age = 20               # int
+height = 1.75          # float
+name = "Ana"           # str
+is_student = True      # bool
+
+print(type(height))    # &lt;class 'float'&gt;
+print(int("42") + 1)   # 43
+print(int(7.9))        # 7 (cuts, doesn't round)
+print(float(8))        # 8.0</pre></div>
+        <div class="mini push">
+          <div class="card"><h4>snake_case</h4><p>Lowercase words joined by <code class="i">_</code>: <code class="i">total_price</code>.</p></div>
+          <div class="card"><h4>Case-sensitive</h4><p><code class="i">Age</code> and <code class="i">age</code> are two different variables.</p></div>
+          <div class="card"><h4>No digit first</h4><p><code class="i">2nd_place</code> is invalid; <code class="i">place_2</code> works.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">A variable is a label stuck on a value. Python works out the type for you; type() tells you what it decided. Conversions like int() and float() are how you turn user input or text from a file into numbers you can calculate with.</aside>
+</section>
+
+<section class="slide" data-mod="Module 01 · Python Basics" style="--acc:var(--m1)">
+  <div class="main">
+    <div class="head">
+      <div class="kicker" style="color:var(--m1)">01<span class="sep">·</span>Basics<span class="sep">/</span>operators</div>
+      <h2>Python is a calculator that <span class="hl">follows maths rules</span></h2>
+    </div>
+    <div class="cols">
+      <div class="stack" style="gap:18px">
+        <table class="t">
+          <thead><tr><th>Operator</th><th>Meaning</th><th>Example</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr><td class="m" style="color:var(--o)">+  -  *</td><td>add, subtract, multiply</td><td class="m">2 * 3</td><td class="m">6</td></tr>
+            <tr><td class="m" style="color:var(--o)">/</td><td>division (always float)</td><td class="m">10 / 2</td><td class="m">5.0</td></tr>
+            <tr><td class="m" style="color:var(--o)">//</td><td>integer division</td><td class="m">10 // 3</td><td class="m">3</td></tr>
+            <tr><td class="m" style="color:var(--o)">%</td><td>remainder (modulo)</td><td class="m">10 % 3</td><td class="m">1</td></tr>
+            <tr><td class="m" style="color:var(--o)">**</td><td>power</td><td class="m">2 ** 10</td><td class="m">1024</td></tr>
+          </tbody>
+        </table>
+        <div><div class="label blue">Why it matters for AI &amp; data</div>
+          <ul class="b" style="--acc:var(--m1)"><li><code class="i">n % 2 == 0</code> tests if a number is even; <code class="i">%</code> also splits data into groups and batches.</li></ul></div>
+        <div class="call g push"><span class="tag">GOTCHA</span><div><code class="i">round(2.5)</code> is <code class="i">2</code> and <code class="i">round(3.5)</code> is <code class="i">4</code>: Python rounds halves to the nearest <strong>even</strong> number.</div></div>
+      </div>
+      <div class="stack">
+        <div class="term"><div class="bar"><i></i><i></i><i></i><span>01_basics.py</span></div>
+<pre class="py numbered">a = 10
+b = 3
+
+print(a / b)    # 3.3333333333333335
+print(a // b)   # 3
+print(a % b)    # 1
+
+print(1 + 2 * 3)    # 7: * before +
+print((1 + 2) * 3)  # 9: brackets first
+
+total = 0
+total += 5      # same as total = total + 5
+print(total)    # 5</pre></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Most operators are what you expect. The three to remember are slash, double slash and percent: real division, whole division and remainder. Precedence follows school maths, and brackets always win.</aside>
+</section>
+
+<section class="slide" data-mod="Module 01 · Python Basics" style="--acc:var(--m1)">
+  <div class="main">
+    <div class="head">
+      <div class="kicker" style="color:var(--m1)">01<span class="sep">·</span>Basics<span class="sep">/</span>functions</div>
+      <h2>Functions: <span class="hl">write it once</span>, use it everywhere</h2>
+    </div>
+    <div class="cols">
+      <div class="stack">
+        <p class="lead">A function packs steps under a name. Define it once with <code class="i">def</code>, give it inputs (<strong>parameters</strong>), and it hands back a result with <code class="i">return</code>.</p>
+        <div><div class="label blue">Why it matters for AI &amp; data</div>
+          <ul class="b" style="--acc:var(--m1)"><li><code class="i">print()</code>, <code class="i">len()</code> and <code class="i">pd.read_csv()</code> are functions someone else wrote. Writing your own is how you stop copy-pasting code.</li></ul></div>
+        <div class="card" style="padding:14px 16px"><div class="label">Anatomy</div>
+          <div class="kv tight">
+            <span class="k">def</span><span class="a">→</span><span class="val">starts a function definition</span>
+            <span class="k">(x)</span><span class="a">→</span><span class="val">parameter: the input</span>
+            <span class="k">"""…"""</span><span class="a">→</span><span class="val">docstring: what it does</span>
+            <span class="k">return</span><span class="a">→</span><span class="val">the result sent back</span>
+          </div></div>
+        <div class="call g push"><span class="tag">GOTCHA</span><div><code class="i">print</code> only <strong>shows</strong> a value; <code class="i">return</code> <strong>gives it back</strong>. A function without <code class="i">return</code> returns <code class="i">None</code>.</div></div>
+      </div>
+      <div class="stack">
+        <div class="term sm"><div class="bar"><i></i><i></i><i></i><span>01_basics.py</span></div>
+<pre class="py numbered">def double(x):
+    """Return the double of x."""
+    return 2 * x
+
+def greet(name, greeting="Hello"):
+    return f"{greeting}, {name}!"
+
+print(double(3))           # 6
+print(greet("Ana"))        # Hello, Ana!
+print(greet("Rui", "Hi"))  # Hi, Rui!</pre></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">The indented block under def is the body. Parameters can have default values, like greeting here. The docstring is what you see when you type double? in a notebook. Stress the difference between print and return: it is the most common beginner bug.</aside>
+</section>
+
+<section class="slide" data-mod="Module 01 · Python Basics" style="--acc:var(--m1)">
+  <div class="main">
+    <div class="head">
+      <div class="kicker" style="color:var(--m1)">01<span class="sep">·</span>Basics<span class="sep">/</span>strings</div>
+      <h2>Strings: text you can <span class="hl">slice, search and format</span></h2>
+    </div>
+    <div class="cols">
+      <div class="stack">
+        <p class="lead">A string is a <strong>sequence of characters</strong>. Index it, slice it with <code class="i">[start:stop]</code>, transform it with methods and build it with <strong>f-strings</strong>.</p>
+        <div class="card">
+          <div class="idx">
+            <span class="h">index</span><span class="i">0</span><span class="i">1</span><span class="i">2</span><span class="i">3</span><span class="i">4</span><span class="i">5</span>
+            <span class="v">word</span><span class="c">P</span><span class="c">y</span><span class="c">t</span><span class="c">h</span><span class="c">o</span><span class="c">n</span>
+            <span class="h">negative</span><span class="i">-6</span><span class="i">-5</span><span class="i">-4</span><span class="i">-3</span><span class="i">-2</span><span class="i">-1</span>
+          </div>
+        </div>
+        <div><div class="label blue">Why it matters for AI &amp; data</div>
+          <ul class="b" style="--acc:var(--m1)"><li>Prompts, documents, reviews and LLM answers are all strings. Cleaning text is step one of every language project.</li></ul></div>
+        <div class="call g push"><span class="tag">GOTCHA</span><div>Strings are <strong>immutable</strong>: <code class="i">word[0] = "J"</code> raises <code class="i">TypeError</code>. Methods like <code class="i">.upper()</code> return a <strong>new</strong> string.</div></div>
+      </div>
+      <div class="term sm"><div class="bar"><i></i><i></i><i></i><span>01_basics.py</span></div>
+<pre class="py numbered">word = "Python"
+print(word[0])       # P
+print(word[-1])      # n
+print(word[0:3])     # Pyt  (stop is excluded)
+print(word[::-1])    # nohtyP
+
+print(word.upper())        # PYTHON
+print("th" in word)        # True
+print(len(word))           # 6
+print("a,b,c".split(","))  # ['a', 'b', 'c']
+
+name, score = "Ana", 0.875
+print(f"{name} scored {score:.1%}")
+# Ana scored 87.5%</pre></div>
+    </div>
+  </div>
+  <aside class="notes">Strings use the same zero-based indexing we will see for lists. Negative indices count from the end. f-strings, with an f before the quotes, are the modern way to put values inside text, and the part after the colon controls the format.</aside>
+</section>
+
+<section class="slide" data-mod="Module 01 · Python Basics" style="--acc:var(--m1)">
+  <div class="main">
+    <div class="head">
+      <div class="kicker" style="color:var(--m1)">01<span class="sep">·</span>Basics<span class="sep">/</span>conditions</div>
+      <h2>if / elif / else: <span class="hl">let the program decide</span></h2>
+    </div>
+    <div class="cols">
+      <div class="stack" style="gap:18px">
+        <p class="lead">Python tests each condition <strong>in order</strong> and runs the <strong>first</strong> block that is <code class="i">True</code>. <code class="i">else</code> catches everything left over.</p>
+        <table class="t">
+          <thead><tr><th>Compare</th><th>Combine</th></tr></thead>
+          <tbody>
+            <tr><td class="m" style="color:var(--o)">==  !=</td><td><code class="i">and</code> both must be True</td></tr>
+            <tr><td class="m" style="color:var(--o)">&lt;  &gt;  &lt;=  &gt;=</td><td><code class="i">or</code> at least one is True</td></tr>
+            <tr><td class="m" style="color:var(--o)">0 &lt;= x &lt;= 10</td><td><code class="i">not</code> flips True and False</td></tr>
+          </tbody>
+        </table>
+        <div class="call g push"><span class="tag">GOTCHA</span><div><code class="i">=</code> <strong>assigns</strong>, <code class="i">==</code> <strong>compares</strong>. And indentation is the syntax: the 4 spaces decide which lines belong to the <code class="i">if</code>.</div></div>
+      </div>
+      <div class="stack">
+        <div class="term"><div class="bar"><i></i><i></i><i></i><span>01_basics.py</span></div>
+<pre class="py numbered">age = 20
+
+if age &lt; 18:
+    print("Minor")
+elif age &lt; 65:
+    print("Adult")
+else:
+    print("Senior")
+# Adult
+
+x = 5
+print(0 &lt;= x &lt;= 10)          # True
+print(x &gt; 0 and x % 2 == 0)  # False</pre></div>
+        <div class="push"><div class="label blue">Why it matters for AI &amp; data</div>
+          <ul class="b" style="--acc:var(--m1)"><li>Every rule in a program is an <code class="i">if</code>: flag a transaction, pick a label from a model's score, skip an empty row.</li></ul></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Walk the age example: 20 is not under 18, so Python moves to elif; 20 is under 65, so it prints Adult and skips the rest. Comparisons give True or False, and and/or/not combine them. Python even lets you chain comparisons like in maths.</aside>
+</section>
+
+<!-- ================================================= 04 DIVIDER 01 -->
+<section class="slide" data-mod="Module 02 · Data Structures" style="--acc:var(--m2)" data-id="data-structures">
+  <canvas class="rain" data-set="2" aria-hidden="true"></canvas>
+  <div class="main">
+    <div class="divider">
+      <div>
+        <div class="mono-num">02</div>
+        <div class="kicker">Module 02 / 06<span class="sep">·</span>Store</div>
         <h1 style="font-size:76px">Data <span class="hl">Structures</span></h1>
         <p class="lead" style="margin-top:20px">How is data stored in Python?</p>
       </div>
       <div class="card" style="padding:26px 28px">
         <div class="label">The journey</div>
-        <div class="tracker" data-stage="1"></div>
+        <div class="tracker" data-stage="2"></div>
         <div style="margin-top:22px">
-          <div style="font-weight:800;font-size:19px;margin-bottom:8px">Start with the container.</div>
+          <div style="font-weight:800;font-size:19px;margin-bottom:8px">You can store one value. Now store many.</div>
           <p class="body">Every AI system takes data in and sends data out. Before you can loop, tabulate or chart anything, you need to know how Python holds a collection of values.</p>
+          <div class="nb">▶ <a href="https://github.com/the-ai-learning-hub/01-python-as-ai-first-steps/tree/main/notebooks/02_Data_Structures" target="_blank" rel="noopener"><span>notebooks/02_Data_Structures</span></a> &nbsp;·&nbsp; 📚 <a href="https://www.w3schools.com/python/python_lists.asp" target="_blank" rel="noopener">W3Schools</a></div>
         </div>
       </div>
     </div>
   </div>
-  <aside class="notes">Module one. Four containers: list, tuple, set, dictionary. Pick the right one and everything downstream gets simpler and faster.</aside>
+  <aside class="notes">Module two. Four containers: list, tuple, set, dictionary. Pick the right one and everything downstream gets simpler and faster.</aside>
 </section>
 
 <!-- ================================================= 05 OVERVIEW -->
-<section class="slide" data-mod="Module 01 · Data Structures" style="--acc:var(--m1)">
+<section class="slide" data-mod="Module 02 · Data Structures" style="--acc:var(--m2)">
   <div class="main">
     <div class="head">
-      <div class="kicker">01<span class="sep">·</span>Data structures<span class="sep">/</span>overview</div>
+      <div class="kicker" style="color:var(--m2)">02<span class="sep">·</span>Data structures<span class="sep">/</span>overview</div>
       <h2>Your <span class="hl">container choice</span> decides your operations</h2>
     </div>
     <p class="lead" style="max-width:none;margin-bottom:18px">A data structure is a way to <strong>organize, store and access</strong> data efficiently. It decides how you can <strong>access, search, modify and iterate</strong> over a collection.</p>
@@ -406,10 +781,10 @@ pre.py .ln{opacity:0;transform:translateX(-10px);transition:opacity .35s ease,tr
 </section>
 
 <!-- ================================================= 06 ZERO INDEX -->
-<section class="slide" data-mod="Module 01 · Data Structures" style="--acc:var(--m1)">
+<section class="slide" data-mod="Module 02 · Data Structures" style="--acc:var(--m2)">
   <div class="main">
     <div class="head">
-      <div class="kicker">01<span class="sep">·</span>Data structures<span class="sep">/</span>core concepts</div>
+      <div class="kicker" style="color:var(--m2)">02<span class="sep">·</span>Data structures<span class="sep">/</span>core concepts</div>
       <h2>Python counts <span class="hl">from zero</span>. Plan for it</h2>
     </div>
     <div class="cols">
@@ -429,7 +804,7 @@ pre.py .ln{opacity:0;transform:translateX(-10px);transition:opacity .35s ease,tr
           <div style="font:500 12px var(--mono);color:var(--muted);margin-top:12px;text-align:center">6 items → indices 0 … 5 · int, str and list in one collection</div>
         </div>
         <div class="mini">
-          <div class="card"><h4>Iterable</h4><p>You can loop over it, one item at a time: the engine of Module 02.</p></div>
+          <div class="card"><h4>Iterable</h4><p>You can loop over it, one item at a time: the engine of Module 03.</p></div>
           <div class="card"><h4>Mutable vs immutable</h4><p>Can it change after creation? Lists can; tuples can't.</p></div>
           <div class="card"><h4>Mixed types</h4><p>One collection can hold numbers, text and even other lists. Exception: set items and dict keys must be immutable.</p></div>
         </div>
@@ -440,10 +815,10 @@ pre.py .ln{opacity:0;transform:translateX(-10px);transition:opacity .35s ease,tr
 </section>
 
 <!-- ================================================= 07 LIST -->
-<section class="slide" data-mod="Module 01 · Data Structures" style="--acc:var(--m1)">
+<section class="slide" data-mod="Module 02 · Data Structures" style="--acc:var(--m2)">
   <div class="main">
     <div class="head">
-      <div class="kicker">01<span class="sep">·</span>Data structures<span class="sep">/</span>list</div>
+      <div class="kicker" style="color:var(--m2)">02<span class="sep">·</span>Data structures<span class="sep">/</span>list</div>
       <h2>Lists: the default home for <span class="hl">ordered, changing</span> data</h2>
     </div>
     <div class="cols">
@@ -451,7 +826,7 @@ pre.py .ln{opacity:0;transform:translateX(-10px);transition:opacity .35s ease,tr
         <p class="lead">A list is an <strong>ordered, mutable</strong> collection that <strong>allows duplicates</strong>: the most-used structure for sequences of data.</p>
         <div><div class="label blue">Why it matters for AI &amp; data</div>
           <ul class="b"><li>A queue of documents to process, a batch of predictions: anything ordered that grows and shrinks.</li>
-          <li>Lists are the raw material Pandas turns into columns (Module 03).</li></ul></div>
+          <li>Lists are the raw material Pandas turns into columns (Module 05).</li></ul></div>
         <div class="call g push"><span class="tag">GOTCHA</span><div><code class="i">remove()</code> deletes only the <strong>first</strong> match, and raises <code class="i">ValueError</code> if the item isn't there. Check with <code class="i">in</code> first.</div></div>
       </div>
       <div class="stack">
@@ -473,10 +848,10 @@ print(fruits)  # ["apple", "orange", "watermelon"]</pre></div>
 </section>
 
 <!-- ================================================= 08 TUPLE -->
-<section class="slide" data-mod="Module 01 · Data Structures" style="--acc:var(--m1)">
+<section class="slide" data-mod="Module 02 · Data Structures" style="--acc:var(--m2)">
   <div class="main">
     <div class="head">
-      <div class="kicker">01<span class="sep">·</span>Data structures<span class="sep">/</span>tuple</div>
+      <div class="kicker" style="color:var(--m2)">02<span class="sep">·</span>Data structures<span class="sep">/</span>tuple</div>
       <h2>Tuples: <span class="hl">lock data</span> you never want changed</h2>
     </div>
     <div class="cols">
@@ -505,10 +880,10 @@ print(city)  # Lisbon</pre></div>
 </section>
 
 <!-- ================================================= 09 SET -->
-<section class="slide" data-mod="Module 01 · Data Structures" style="--acc:var(--m1)">
+<section class="slide" data-mod="Module 02 · Data Structures" style="--acc:var(--m2)">
   <div class="main">
     <div class="head">
-      <div class="kicker">01<span class="sep">·</span>Data structures<span class="sep">/</span>set</div>
+      <div class="kicker" style="color:var(--m2)">02<span class="sep">·</span>Data structures<span class="sep">/</span>set</div>
       <h2>Sets: kill duplicates, <span class="hl">compare groups</span> instantly</h2>
     </div>
     <div class="cols">
@@ -536,14 +911,14 @@ print(A &amp; B)  # Intersection: {3}
 print(A - B)  # Difference: {1, 2}</pre></div>
     </div>
   </div>
-  <aside class="notes">Sets answer "who is in both groups?" in one character. That is a cohort-analysis question leaders ask every week.</aside>
+  <aside class="notes">Sets answer "who is in both groups?" in one character. That is a question data analysts ask every day: who bought A and B, who left, who is new.</aside>
 </section>
 
 <!-- ================================================= 10 DICT -->
-<section class="slide" data-mod="Module 01 · Data Structures" style="--acc:var(--m1)">
+<section class="slide" data-mod="Module 02 · Data Structures" style="--acc:var(--m2)">
   <div class="main">
     <div class="head">
-      <div class="kicker">01<span class="sep">·</span>Data structures<span class="sep">/</span>dict</div>
+      <div class="kicker" style="color:var(--m2)">02<span class="sep">·</span>Data structures<span class="sep">/</span>dict</div>
       <h2>Dictionaries: key → value, <span class="hl">the shape of every API</span></h2>
     </div>
     <div class="cols">
@@ -574,34 +949,35 @@ student["grade"] = 18    # Add new key</pre></div>
 </section>
 
 <!-- ================================================= 11 DIVIDER 02 -->
-<section class="slide" data-mod="Module 02 · Loops" style="--acc:var(--m2)">
-  <canvas class="rain" data-set="2" aria-hidden="true"></canvas>
+<section class="slide" data-mod="Module 03 · Loops" style="--acc:var(--m3)" data-id="loops">
+  <canvas class="rain" data-set="3" aria-hidden="true"></canvas>
   <div class="main">
     <div class="divider">
       <div>
-        <div class="mono-num">02</div>
-        <div class="kicker" style="color:var(--m2)">Module 02 / 04<span class="sep">·</span>Repeat</div>
+        <div class="mono-num">03</div>
+        <div class="kicker" style="color:var(--m3)">Module 03 / 06<span class="sep">·</span>Repeat</div>
         <h1 style="font-size:76px"><span class="hl">Loops</span></h1>
         <p class="lead" style="margin-top:20px">What is a loop?</p>
       </div>
       <div class="card" style="padding:26px 28px">
         <div class="label">The journey</div>
-        <div class="tracker" data-stage="2"></div>
+        <div class="tracker" data-stage="3"></div>
         <div style="margin-top:22px">
           <div style="font-weight:800;font-size:19px;margin-bottom:8px">You can store data. Now make it work at scale.</div>
           <p class="body">Writing an instruction three times is fine. Three million times is not. Loops make one instruction run over every item in a list, tuple, set or dict.</p>
+          <div class="nb">▶ <a href="https://github.com/the-ai-learning-hub/01-python-as-ai-first-steps/tree/main/notebooks/03_Loops" target="_blank" rel="noopener"><span>notebooks/03_Loops</span></a> &nbsp;·&nbsp; 📚 <a href="https://www.w3schools.com/python/python_for_loops.asp" target="_blank" rel="noopener">W3Schools</a></div>
         </div>
       </div>
     </div>
   </div>
-  <aside class="notes">Module two. We have containers full of data; now we need to do something to every item without copy-pasting code.</aside>
+  <aside class="notes">Module three. We have containers full of data; now we need to do something to every item without copy-pasting code.</aside>
 </section>
 
 <!-- ================================================= 12 WHY LOOPS -->
-<section class="slide" data-mod="Module 02 · Loops" style="--acc:var(--m2)">
+<section class="slide" data-mod="Module 03 · Loops" style="--acc:var(--m3)">
   <div class="main">
     <div class="head">
-      <div class="kicker" style="color:var(--m2)">02<span class="sep">·</span>Loops<span class="sep">/</span>why loops</div>
+      <div class="kicker" style="color:var(--m3)">03<span class="sep">·</span>Loops<span class="sep">/</span>why loops</div>
       <h2>Loops turn one instruction <span class="hl">into a thousand</span></h2>
     </div>
     <div class="cols">
@@ -633,10 +1009,10 @@ for i in range(3):
 </section>
 
 <!-- ================================================= 13 WHILE -->
-<section class="slide" data-mod="Module 02 · Loops" style="--acc:var(--m2)">
+<section class="slide" data-mod="Module 03 · Loops" style="--acc:var(--m3)">
   <div class="main">
     <div class="head">
-      <div class="kicker" style="color:var(--m2)">02<span class="sep">·</span>Loops<span class="sep">/</span>while: conditional loop</div>
+      <div class="kicker" style="color:var(--m3)">03<span class="sep">·</span>Loops<span class="sep">/</span>while: conditional loop</div>
       <h2>while: repeat until <span class="hl">the condition says stop</span></h2>
     </div>
     <div class="cols">
@@ -670,7 +1046,7 @@ while counter &lt;= 3:
             <text x="200" y="42" font-family="JetBrains Mono" font-size="11" fill="#ff7a7a">False</text>
             <text x="202" y="70" font-family="JetBrains Mono" font-size="11" fill="#7c88a3">exit</text>
           </svg>
-          <ol class="n" style="--acc:var(--m2)">
+          <ol class="n" style="--acc:var(--m3)">
             <li><code class="i">counter</code> starts at 1.</li>
             <li><code class="i">while</code> asks: "is <code class="i">counter</code> ≤ 3?"</li>
             <li>If yes, print "Hello!" and add 1 to <code class="i">counter</code>.</li>
@@ -684,22 +1060,22 @@ while counter &lt;= 3:
 </section>
 
 <!-- ================================================= 14 FOR -->
-<section class="slide" data-mod="Module 02 · Loops" style="--acc:var(--m2)">
+<section class="slide" data-mod="Module 03 · Loops" style="--acc:var(--m3)">
   <div class="main">
     <div class="head" style="margin-bottom:14px">
-      <div class="kicker" style="color:var(--m2)">02<span class="sep">·</span>Loops<span class="sep">/</span>for: sequential loop</div>
+      <div class="kicker" style="color:var(--m3)">03<span class="sep">·</span>Loops<span class="sep">/</span>for: sequential loop</div>
       <h2>for: walk any sequence, <span class="hl">one item at a time</span></h2>
     </div>
     <p class="lead" style="max-width:none;margin-bottom:16px"><code class="i">for</code> is ideal when you <strong>know up front how many times</strong> to repeat, or want to visit <strong>every item of a sequence</strong>: a range of numbers, a string, a list.</p>
     <div style="display:grid;grid-template-columns:1fr 1fr 1.35fr;gap:16px;margin-bottom:16px">
-      <div class="stack" style="gap:10px"><div class="label" style="color:var(--m2);margin:0">Numbers · range()</div>
+      <div class="stack" style="gap:10px"><div class="label" style="color:var(--m3);margin:0">Numbers · range()</div>
         <div class="term xs"><div class="bar"><i></i><i></i><i></i></div><pre class="py">for i in range(3):
     print("Hello!", i)
 </pre></div>
         <div class="term out xs"><div class="bar"><span style="margin:0">output</span></div><pre><span class="p">&gt;&gt;</span> Hello! 0
    Hello! 1
    Hello! 2</pre></div></div>
-      <div class="stack" style="gap:10px"><div class="label" style="color:var(--m2);margin:0">Text · a string</div>
+      <div class="stack" style="gap:10px"><div class="label" style="color:var(--m3);margin:0">Text · a string</div>
         <div class="term xs"><div class="bar"><i></i><i></i><i></i></div><pre class="py">for i in "Python":
     print(i)
 </pre></div>
@@ -709,7 +1085,7 @@ while counter &lt;= 3:
    h
    o
    n</pre></div></div>
-      <div class="stack" style="gap:10px"><div class="label" style="color:var(--m2);margin:0">Records · a list</div>
+      <div class="stack" style="gap:10px"><div class="label" style="color:var(--m3);margin:0">Records · a list</div>
         <div class="term xs"><div class="bar"><i></i><i></i><i></i></div><pre class="py">fruits = ["apple", "banana", "orange"]
 for fruit in fruits:
     print(fruit)</pre></div>
@@ -719,42 +1095,229 @@ for fruit in fruits:
     </div>
     <div class="row" style="margin-top:auto;align-items:stretch">
       <div style="flex:1"><div class="label blue">Why it matters for AI &amp; data</div>
-        <ul class="b" style="--acc:var(--m2)"><li>Apply the same step to every record: clean each text, score each customer. Pandas (next) runs this loop for you.</li></ul></div>
+        <ul class="b" style="--acc:var(--m3)"><li>Apply the same step to every record: clean each text, score each customer. Pandas (next) runs this loop for you.</li></ul></div>
       <div class="call g" style="flex:1"><span class="tag">GOTCHA</span><div><code class="i">range(3)</code> stops <strong>before</strong> 3 → 0, 1, 2. Looping over a string yields characters, not words.</div></div>
     </div>
   </div>
-  <aside class="notes">Three sequences, one pattern. Notice the middle example: a string is a sequence of characters. That idea comes back when we count words in Module 04.</aside>
+  <aside class="notes">Three sequences, one pattern. Notice the middle example: a string is a sequence of characters. That idea comes back when we count words in Module 06.</aside>
 </section>
 
-<!-- ================================================= 15 DIVIDER 03 -->
-<section class="slide" data-mod="Module 03 · Pandas" style="--acc:var(--m3)">
-  <canvas class="rain" data-set="3" aria-hidden="true"></canvas>
+<!-- ================================================= LOOPS · CONTROL & COMPREHENSIONS -->
+<section class="slide" data-mod="Module 03 · Loops" style="--acc:var(--m3)">
+  <div class="main">
+    <div class="head">
+      <div class="kicker" style="color:var(--m3)">03<span class="sep">·</span>Loops<span class="sep">/</span>break, continue &amp; comprehensions</div>
+      <h2>Steer the loop, then <span class="hl">write it in one line</span></h2>
+    </div>
+    <div class="cols" style="grid-template-columns:1fr 1fr;gap:28px">
+      <div class="stack" style="gap:16px">
+        <p class="lead" style="font-size:18px"><code class="i">break</code> leaves the loop early; <code class="i">continue</code> skips to the next item.</p>
+        <div class="term xs"><div class="bar"><i></i><i></i><i></i><span>03_loops.py</span></div>
+<pre class="py numbered">numbers = [4, 7, -1, 10, 3]
+
+for n in numbers:
+    if n &lt; 0:
+        print("Negative found, stop")
+        break
+    if n % 2 == 1:
+        continue        # skip odd numbers
+    print(n)
+# 4
+# Negative found, stop</pre></div>
+        <div class="call g push"><span class="tag">GOTCHA</span><div><code class="i">while True:</code> runs forever unless something inside reaches a <code class="i">break</code>. Make sure one always will.</div></div>
+      </div>
+      <div class="stack" style="gap:16px">
+        <p class="lead" style="font-size:18px">A <strong>list comprehension</strong> builds a new list from a loop, in one readable line.</p>
+        <div class="term xs"><div class="bar"><i></i><i></i><i></i><span>03_loops.py</span></div>
+<pre class="py numbered"># The classic loop
+squares = []
+for n in range(5):
+    squares.append(n ** 2)
+
+# The same, as a comprehension
+squares = [n ** 2 for n in range(5)]
+print(squares)   # [0, 1, 4, 9, 16]
+
+# With a filter
+evens = [n for n in range(10) if n % 2 == 0]
+print(evens)     # [0, 2, 4, 6, 8]</pre></div>
+        <div class="call t push"><span class="tag">TAKEAWAY</span><div>Read it as <em>"n squared, for each n in the range, if…"</em>. If it no longer fits in one clear line, go back to a normal loop.</div></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Trace the left example with the class: 4 is even, so it prints; 7 is odd, so continue skips it; -1 is negative, so break ends the loop and 10 and 3 are never visited. On the right, the comprehension does exactly what the four-line loop does. You will see comprehensions everywhere in data code.</aside>
+</section>
+
+<!-- ================================================= MODULE 04 · MODULES, ERRORS, CLASSES -->
+<section class="slide" data-mod="Module 04 · Modules, Errors &amp; Classes" style="--acc:var(--m4)" data-id="reuse">
+  <canvas class="rain" data-set="4" aria-hidden="true"></canvas>
   <div class="main">
     <div class="divider">
       <div>
-        <div class="mono-num">03</div>
-        <div class="kicker" style="color:var(--m3)">Module 03 / 04<span class="sep">·</span>Tabulate</div>
+        <div class="mono-num">04</div>
+        <div class="kicker" style="color:var(--m4)">Module 04 / 06<span class="sep">·</span>Reuse</div>
+        <h1 style="font-size:64px">Modules, Errors <span class="hl">&amp; Classes</span></h1>
+        <p class="lead" style="margin-top:20px">How do we reuse and protect code?</p>
+      </div>
+      <div class="card" style="padding:26px 28px">
+        <div class="label">The journey</div>
+        <div class="tracker" data-stage="4"></div>
+        <div style="margin-top:18px">
+          <div style="font-weight:800;font-size:19px;margin-bottom:8px">You can write the logic. Now reuse it.</div>
+          <p class="body">Real programs import other people's code, survive bad input and bundle data with behaviour. Pandas, Matplotlib and every AI library are built on these three ideas.</p>
+          <div class="nb">▶ <a href="https://github.com/the-ai-learning-hub/01-python-as-ai-first-steps/tree/main/notebooks/04_Modules_Errors_Classes" target="_blank" rel="noopener"><span>notebooks/04_Modules_Errors_Classes</span></a> &nbsp;·&nbsp; 📚 <a href="https://www.w3schools.com/python/python_classes.asp" target="_blank" rel="noopener">W3Schools</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Module four is the bridge between plain Python and the libraries. Everything you use from now on is imported, can fail, and is an object. Once these three ideas click, pandas stops feeling like magic.</aside>
+</section>
+
+<section class="slide" data-mod="Module 04 · Modules, Errors &amp; Classes" style="--acc:var(--m4)">
+  <div class="main">
+    <div class="head">
+      <div class="kicker" style="color:var(--m4)">04<span class="sep">·</span>Reuse<span class="sep">/</span>modules &amp; imports</div>
+      <h2>import: build on <span class="hl">code that already works</span></h2>
+    </div>
+    <div class="cols">
+      <div class="stack">
+        <p class="lead">A <strong>module</strong> is a <code class="i">.py</code> file full of functions. <code class="i">import</code> brings it into your program, so you don't rewrite what already exists.</p>
+        <div><div class="label blue">Why it matters for AI &amp; data</div>
+          <ul class="b" style="--acc:var(--m4)"><li>Every AI notebook starts with imports: <code class="i">import pandas as pd</code>. The library ecosystem is the reason Python leads in AI.</li></ul></div>
+        <div class="call g push"><span class="tag">GOTCHA</span><div>Never name your own file <code class="i">pandas.py</code> or <code class="i">random.py</code>: Python imports <strong>your</strong> file instead of the library. And avoid <code class="i">from x import *</code>.</div></div>
+      </div>
+      <div class="stack">
+        <div class="term sm"><div class="bar"><i></i><i></i><i></i><span>04_reuse.py</span></div>
+<pre class="py numbered">import math
+from random import choice
+from collections import Counter
+import pandas as pd       # alias by convention
+
+print(math.sqrt(16))            # 4.0
+print(choice(["red", "blue"]))  # a random pick
+
+words = "to be or not to be".split()
+print(Counter(words).most_common(2))
+# [('to', 2), ('be', 2)]</pre></div>
+        <div class="mini push">
+          <div class="card"><h4>Standard library</h4><p>Comes with Python: <code class="i">math</code>, <code class="i">random</code>, <code class="i">json</code>, <code class="i">datetime</code>.</p></div>
+          <div class="card"><h4>Third party</h4><p>Install once with <code class="i">uv add pandas</code>, then import.</p></div>
+          <div class="card"><h4>Your own</h4><p>Save <code class="i">utils.py</code> next to your code: <code class="i">import utils</code>.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Three places code comes from: the standard library that ships with Python, third-party libraries you add with uv, and your own files. The as keyword gives a short alias; pd, np, plt and sns are conventions the whole community uses.</aside>
+</section>
+
+<section class="slide" data-mod="Module 04 · Modules, Errors &amp; Classes" style="--acc:var(--m4)">
+  <div class="main">
+    <div class="head">
+      <div class="kicker" style="color:var(--m4)">04<span class="sep">·</span>Reuse<span class="sep">/</span>errors &amp; exceptions</div>
+      <h2>Errors are messages: <span class="hl">read them, then handle them</span></h2>
+    </div>
+    <div class="cols">
+      <div class="stack" style="gap:18px">
+        <p class="lead">When something goes wrong, Python <strong>raises an exception</strong> and prints a traceback. Read the <strong>last line first</strong>: it names the error and the reason.</p>
+        <div class="term out xs"><div class="bar"><span style="margin:0">traceback</span></div>
+<pre style="color:var(--body)">Traceback (most recent call last):
+  File "app.py", line 2, in &lt;module&gt;
+    age = int("twenty")
+<span style="color:var(--red);font-weight:700">ValueError</span>: invalid literal for int() with base 10: 'twenty'</pre></div>
+        <div class="pills"><span class="pill ghost">NameError</span><span class="pill ghost">TypeError</span><span class="pill ghost">ValueError</span><span class="pill ghost">KeyError</span><span class="pill ghost">IndexError</span><span class="pill ghost">ZeroDivisionError</span><span class="pill ghost">FileNotFoundError</span></div>
+        <div class="call g push"><span class="tag">GOTCHA</span><div>Never write a bare <code class="i">except:</code>. It hides real bugs too. Catch the <strong>specific</strong> error you expect.</div></div>
+      </div>
+      <div class="stack">
+        <div class="term sm"><div class="bar"><i></i><i></i><i></i><span>04_reuse.py</span></div>
+<pre class="py numbered">def to_number(text):
+    try:
+        return int(text)
+    except ValueError:
+        print(f"'{text}' is not a number")
+        return None
+
+print(to_number("42"))      # 42
+print(to_number("twenty"))  # 'twenty' is not a number
+                            # None</pre></div>
+        <div class="push"><div class="label blue">Why it matters for AI &amp; data</div>
+          <ul class="b" style="--acc:var(--m4)"><li>Files go missing, APIs time out, people type "abc" where a number belongs. <code class="i">try</code>/<code class="i">except</code> keeps the program running and tells you what failed.</li></ul></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Errors are not failures, they are information. Teach the habit of reading the last line of the traceback first. Then show try/except: the risky line goes in try, the plan B in except. Only catch the errors you expect.</aside>
+</section>
+
+<section class="slide" data-mod="Module 04 · Modules, Errors &amp; Classes" style="--acc:var(--m4)">
+  <div class="main">
+    <div class="head">
+      <div class="kicker" style="color:var(--m4)">04<span class="sep">·</span>Reuse<span class="sep">/</span>classes &amp; objects</div>
+      <h2>Classes bundle <span class="hl">data and behaviour</span> into objects</h2>
+    </div>
+    <div class="cols">
+      <div class="stack">
+        <p class="lead">A <strong>class</strong> is a blueprint; an <strong>object</strong> is one thing built from it. <strong>Attributes</strong> hold its data and <strong>methods</strong> are the functions it can run.</p>
+        <div><div class="label blue">Why it matters for AI &amp; data</div>
+          <ul class="b" style="--acc:var(--m4)"><li>You already use objects: <code class="i">fruits.append()</code>, <code class="i">df.head()</code>. AI models are too: <code class="i">model.fit(X, y)</code>.</li></ul></div>
+        <div class="card" style="padding:14px 16px"><div class="label">Anatomy</div>
+          <div class="kv tight">
+            <span class="k">class</span><span class="a">→</span><span class="val">the blueprint: BankAccount</span>
+            <span class="k">__init__</span><span class="a">→</span><span class="val">runs when an object is created</span>
+            <span class="k">self.balance</span><span class="a">→</span><span class="val">an attribute (the object's data)</span>
+            <span class="k">deposit()</span><span class="a">→</span><span class="val">a method</span>
+          </div></div>
+        <div class="call g push"><span class="tag">GOTCHA</span><div>Every method takes <code class="i">self</code> as its first parameter: it is the object itself. Forget it and you get a <code class="i">TypeError</code> about arguments.</div></div>
+      </div>
+      <div class="stack">
+        <div class="term xs"><div class="bar"><i></i><i></i><i></i><span>04_reuse.py</span></div>
+<pre class="py numbered">class BankAccount:
+    def __init__(self, owner, balance=0):
+        self.owner = owner
+        self.balance = balance
+
+    def deposit(self, amount):
+        if amount &lt;= 0:
+            raise ValueError("Amount must be positive")
+        self.balance += amount
+
+account = BankAccount("Ana")
+account.deposit(50)
+print(account.owner, account.balance)  # Ana 50</pre></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">One blueprint, many objects: two accounts share the same methods but keep their own balance. Notice that deposit raises a ValueError for invalid amounts, so classes and exceptions work together. When you call df.head() in the next module, you are calling a method on a DataFrame object.</aside>
+</section>
+
+<!-- ================================================= 15 DIVIDER 03 -->
+<section class="slide" data-mod="Module 05 · Pandas" style="--acc:var(--m5)" data-id="pandas">
+  <canvas class="rain" data-set="5" aria-hidden="true"></canvas>
+  <div class="main">
+    <div class="divider">
+      <div>
+        <div class="mono-num">05</div>
+        <div class="kicker" style="color:var(--m5)">Module 05 / 06<span class="sep">·</span>Tabulate</div>
         <h1 style="font-size:76px"><span class="hl">Pandas</span></h1>
         <p class="lead" style="margin-top:20px">Tables at scale.</p>
       </div>
       <div class="card" style="padding:26px 28px">
         <div class="label">The journey</div>
-        <div class="tracker" data-stage="3"></div>
+        <div class="tracker" data-stage="5"></div>
         <div style="margin-top:22px">
           <div style="font-weight:800;font-size:19px;margin-bottom:8px">Loops scale your logic. Tables scale your data.</div>
-          <p class="body">Real business data arrives as rows and columns, thousands of them. Pandas applies an operation to a whole column at once, so you write the intent, not the loop.</p>
+          <p class="body">Real data arrives as rows and columns, thousands of them. Pandas, a library you import, applies an operation to a whole column at once, so you write the intent, not the loop.</p>
+          <div class="nb">▶ <a href="https://github.com/the-ai-learning-hub/01-python-as-ai-first-steps/tree/main/notebooks/05_Pandas" target="_blank" rel="noopener"><span>notebooks/05_Pandas</span></a> &nbsp;·&nbsp; 📚 <a href="https://www.w3schools.com/python/pandas/default.asp" target="_blank" rel="noopener">W3Schools</a></div>
         </div>
       </div>
     </div>
   </div>
-  <aside class="notes">Module three. Everything we learned, containers and loops, is packaged by Pandas into one object: the DataFrame.</aside>
+  <aside class="notes">Module five. Everything we learned, containers, loops and objects, is packaged by Pandas into one object: the DataFrame.</aside>
 </section>
 
 <!-- ================================================= 16 PANDAS -->
-<section class="slide" data-mod="Module 03 · Pandas" style="--acc:var(--m3)">
+<section class="slide" data-mod="Module 05 · Pandas" style="--acc:var(--m5)">
   <div class="main">
     <div class="head">
-      <div class="kicker" style="color:var(--m3)">03<span class="sep">·</span>Pandas<span class="sep">/</span>what it is</div>
+      <div class="kicker" style="color:var(--m5)">05<span class="sep">·</span>Pandas<span class="sep">/</span>what it is</div>
       <h2>Pandas: a spreadsheet <span class="hl">you can program</span></h2>
     </div>
     <p class="lead" style="max-width:none;margin-bottom:28px">Pandas is a <strong>library for structured data (tables)</strong>. It makes reading, cleaning, transforming and analyzing data fast and repeatable.</p>
@@ -766,7 +1329,7 @@ for fruit in fruits:
     </div>
     <div class="row" style="margin-top:auto;align-items:stretch">
       <div style="flex:1"><div class="label blue">Why it matters for AI &amp; data</div>
-        <ul class="b" style="--acc:var(--m3)"><li>The standard step to <strong>prepare data before applying models</strong>.</li>
+        <ul class="b" style="--acc:var(--m5)"><li>The standard step to <strong>prepare data before applying models</strong>.</li>
         <li>Every analysis becomes a re-runnable script, with no manual copy-paste between spreadsheets.</li></ul></div>
       <div class="call t" style="flex:1"><span class="tag">TAKEAWAY</span><div>Think of Pandas as Excel with a memory: the same steps, applied the same way, every time, on 100 rows or 10 million.</div></div>
     </div>
@@ -775,57 +1338,55 @@ for fruit in fruits:
 </section>
 
 <!-- ================================================= 17 SERIES / DF -->
-<section class="slide" data-mod="Module 03 · Pandas" style="--acc:var(--m3)">
+<section class="slide" data-mod="Module 05 · Pandas" style="--acc:var(--m5)">
   <div class="main">
     <div class="head">
-      <div class="kicker" style="color:var(--m3)">03<span class="sep">·</span>Pandas<span class="sep">/</span>Series &amp; DataFrame</div>
+      <div class="kicker" style="color:var(--m5)">05<span class="sep">·</span>Pandas<span class="sep">/</span>Series &amp; DataFrame</div>
       <h2>Series is a column; <span class="hl">DataFrame is the table</span></h2>
     </div>
     <div class="cols">
       <div class="stack">
-        <p class="lead">A <strong>Series</strong> is one-dimensional: values with labels (the index). A <strong>DataFrame</strong> is two-dimensional: rows and columns, like an Excel sheet. Think of it as a dictionary of columns (Module 01).</p>
+        <p class="lead">A <strong>Series</strong> is one-dimensional: values with labels (the index). A <strong>DataFrame</strong> is two-dimensional: rows and columns, like an Excel sheet. Think of it as a dictionary of columns (Module 02).</p>
         <div><div class="label blue">Why it matters for AI &amp; data</div>
-          <ul class="b" style="--acc:var(--m3)"><li>The DataFrame is the input format ML libraries such as scikit-learn expect.</li>
+          <ul class="b" style="--acc:var(--m5)"><li>The DataFrame is the input format ML libraries such as scikit-learn expect.</li>
           <li>Fast access by column name, not by cell address.</li></ul></div>
-        <div class="call g push"><span class="tag">GOTCHA</span><div><code class="i">df["tip"]</code> returns a Series; <code class="i">df[["tip"]]</code> returns a DataFrame. Mixing them up is a classic source of shape errors.</div></div>
+        <div class="call g push"><span class="tag">GOTCHA</span><div><code class="i">df["species"]</code> returns a Series; <code class="i">df[["species"]]</code> returns a DataFrame. Mixing them up is a classic source of shape errors.</div></div>
       </div>
       <div class="stack" style="gap:12px">
         <div class="term xs"><div class="bar"><i></i><i></i><i></i><span>03_pandas.ipynb</span></div>
 <pre class="py numbered" style="font-size:13px;padding:12px 18px 12px">import seaborn as sns
 import pandas as pd
 
-# Load the 'tips' dataset directly from Seaborn
-df = sns.load_dataset('tips')
+# Load the Palmer Penguins dataset
+df = sns.load_dataset('penguins')
 df</pre></div>
         <div class="term out"><div class="bar"><span style="margin:0">output · df</span></div>
           <div style="padding:8px 10px 10px">
           <table class="df">
-            <tr><th></th><th>total_bill</th><th>tip</th><th>sex</th><th>smoker</th><th>day</th><th>time</th><th>size</th></tr>
-            <tr><td>0</td><td>16.99</td><td>1.01</td><td>Female</td><td>No</td><td>Sun</td><td>Dinner</td><td>2</td></tr>
-            <tr><td>1</td><td>10.34</td><td>1.66</td><td>Male</td><td>No</td><td>Sun</td><td>Dinner</td><td>3</td></tr>
-            <tr><td>2</td><td>21.01</td><td>3.50</td><td>Male</td><td>No</td><td>Sun</td><td>Dinner</td><td>3</td></tr>
-            <tr><td>3</td><td>23.68</td><td>3.31</td><td>Male</td><td>No</td><td>Sun</td><td>Dinner</td><td>2</td></tr>
-            <tr><td>4</td><td>24.59</td><td>3.61</td><td>Female</td><td>No</td><td>Sun</td><td>Dinner</td><td>4</td></tr>
+            <tr><th></th><th>species</th><th>island</th><th>bill_len</th><th>bill_dep</th><th>flipper</th><th>mass_g</th><th>sex</th></tr>
+            <tr><td>0</td><td>Adelie</td><td>Torgersen</td><td>39.1</td><td>18.7</td><td>181.0</td><td>3750.0</td><td>MALE</td></tr>
+            <tr><td>1</td><td>Adelie</td><td>Torgersen</td><td>39.5</td><td>17.4</td><td>186.0</td><td>3800.0</td><td>FEMALE</td></tr>
+            <tr><td>2</td><td>Adelie</td><td>Torgersen</td><td>40.3</td><td>18.0</td><td>195.0</td><td>3250.0</td><td>FEMALE</td></tr>
+            <tr><td>3</td><td>Adelie</td><td>Torgersen</td><td class="nan">NaN</td><td class="nan">NaN</td><td class="nan">NaN</td><td class="nan">NaN</td><td class="nan">NaN</td></tr>
+            <tr><td>4</td><td>Adelie</td><td>Torgersen</td><td>36.7</td><td>19.3</td><td>193.0</td><td>3450.0</td><td>FEMALE</td></tr>
             <tr><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
-            <tr><td>239</td><td>29.03</td><td>5.92</td><td>Male</td><td>No</td><td>Sat</td><td>Dinner</td><td>3</td></tr>
-            <tr><td>240</td><td>27.18</td><td>2.00</td><td>Female</td><td>Yes</td><td>Sat</td><td>Dinner</td><td>2</td></tr>
-            <tr><td>241</td><td>22.67</td><td>2.00</td><td>Male</td><td>Yes</td><td>Sat</td><td>Dinner</td><td>2</td></tr>
-            <tr><td>242</td><td>17.82</td><td>1.75</td><td>Male</td><td>No</td><td>Sat</td><td>Dinner</td><td>2</td></tr>
-            <tr><td>243</td><td>18.78</td><td>3.00</td><td>Female</td><td>No</td><td>Thur</td><td>Dinner</td><td>2</td></tr>
+            <tr><td>341</td><td>Gentoo</td><td>Biscoe</td><td>50.4</td><td>15.7</td><td>222.0</td><td>5750.0</td><td>MALE</td></tr>
+            <tr><td>342</td><td>Gentoo</td><td>Biscoe</td><td>45.2</td><td>14.8</td><td>212.0</td><td>5200.0</td><td>FEMALE</td></tr>
+            <tr><td>343</td><td>Gentoo</td><td>Biscoe</td><td>49.9</td><td>16.1</td><td>213.0</td><td>5400.0</td><td>MALE</td></tr>
           </table>
-          <div style="font:500 11.5px var(--mono);color:var(--muted);margin-top:6px">244 rows × 7 columns</div></div>
+          <div style="font:500 11.5px var(--mono);color:var(--muted);margin-top:6px">344 rows × 7 columns · <span style="color:var(--red)">NaN</span> = missing value</div></div>
         </div>
       </div>
     </div>
   </div>
-  <aside class="notes">One line loads a real dataset: restaurant bills and tips. Each column is a Series; the whole thing is a DataFrame. 244 rows and 7 columns, already more than you'd want to eyeball.</aside>
+  <aside class="notes">One line loads a real dataset: 344 penguins measured by scientists in Antarctica, three species on three islands. Each column is a Series; the whole thing is a DataFrame. Point out row 3: NaN means a value is missing, and real data always has some. Column names are shortened here to fit the slide.</aside>
 </section>
 
 <!-- ================================================= 18 READING -->
-<section class="slide" data-mod="Module 03 · Pandas" style="--acc:var(--m3)">
+<section class="slide" data-mod="Module 05 · Pandas" style="--acc:var(--m5)">
   <div class="main">
     <div class="head">
-      <div class="kicker" style="color:var(--m3)">03<span class="sep">·</span>Pandas<span class="sep">/</span>reading data</div>
+      <div class="kicker" style="color:var(--m5)">05<span class="sep">·</span>Pandas<span class="sep">/</span>reading data</div>
       <h2>One line loads <span class="hl">CSV, Excel, SQL or JSON</span></h2>
     </div>
     <p class="lead" style="max-width:none;margin-bottom:16px"><strong>Reading data</strong> means loading information from a file into Python. Pandas reads many formats (CSV, Excel, JSON, text) with one function each.</p>
@@ -842,7 +1403,7 @@ df</pre></div>
     </table>
     <div class="row" style="margin-top:auto;align-items:stretch">
       <div style="flex:1"><div class="label blue">Why it matters for AI &amp; data</div>
-        <ul class="b" style="--acc:var(--m3)"><li>Point Pandas at the data the business already has (exports, warehouse tables, API dumps), with no re-keying.</li></ul></div>
+        <ul class="b" style="--acc:var(--m5)"><li>Point Pandas at the data the business already has (exports, warehouse tables, API dumps), with no re-keying.</li></ul></div>
       <div class="call g" style="flex:1"><span class="tag">GOTCHA</span><div>Accented text (ç, ã) loading as garbage? Pass the encoding explicitly: <code class="i">pd.read_csv(file, encoding="utf-8")</code>.</div></div>
     </div>
   </div>
@@ -850,26 +1411,26 @@ df</pre></div>
 </section>
 
 <!-- ================================================= 19 OPS -->
-<section class="slide" data-mod="Module 03 · Pandas" style="--acc:var(--m3)">
+<section class="slide" data-mod="Module 05 · Pandas" style="--acc:var(--m5)">
   <div class="main">
     <div class="head">
-      <div class="kicker" style="color:var(--m3)">03<span class="sep">·</span>Pandas<span class="sep">/</span>common operations</div>
+      <div class="kicker" style="color:var(--m5)">05<span class="sep">·</span>Pandas<span class="sep">/</span>common operations</div>
       <h2>Six commands to <span class="hl">understand any dataset</span></h2>
     </div>
     <div class="cols" style="grid-template-columns:.78fr 1.22fr;gap:32px">
       <div class="stack" style="gap:18px">
         <p class="lead" style="font-size:17.5px">Before modeling anything, <strong>inspect</strong>: size, columns, types, missing values, distributions. Pandas answers each in one line.</p>
-        <div><div class="label" style="color:var(--m3)">What Pandas lets you do</div>
-          <ul class="b" style="--acc:var(--m3);gap:6px"><li><strong>Read</strong> files: CSV, Excel, JSON and more</li><li><strong>Select and filter</strong> rows and columns</li><li><strong>Handle</strong> missing values</li><li><strong>Group and summarize</strong></li></ul></div>
+        <div><div class="label" style="color:var(--m5)">What Pandas lets you do</div>
+          <ul class="b" style="--acc:var(--m5);gap:6px"><li><strong>Read</strong> files: CSV, Excel, JSON and more</li><li><strong>Select and filter</strong> rows and columns</li><li><strong>Handle</strong> missing values</li><li><strong>Group and summarize</strong></li></ul></div>
         <div><div class="label blue">Why it matters for AI &amp; data</div>
-          <ul class="b" style="--acc:var(--m3)"><li>Five minutes of inspection validates a hypothesis and catches the gaps that silently break AI models.</li></ul></div>
+          <ul class="b" style="--acc:var(--m5)"><li>Five minutes of inspection validates a hypothesis and catches the gaps that silently break AI models.</li></ul></div>
         <div class="call g push"><span class="tag">GOTCHA</span><div><code class="i">sort_values()</code> returns a <strong>new</strong> DataFrame. <code class="i">df</code> is unchanged unless you reassign it.</div></div>
       </div>
       <div class="term xs"><div class="bar"><i></i><i></i><i></i><span>03_pandas.ipynb</span></div>
 <pre class="py numbered" style="font-size:13.6px;line-height:1.5">import pandas as pd
 
-# Example: load a CSV (use a real file if you have one)
-df = pd.read_csv("example_file.csv")
+# Load the penguins from a CSV file
+df = pd.read_csv("data/penguins.csv")
 
 # Show the first 5 rows
 print(df.head())
@@ -886,49 +1447,88 @@ print(df.info())
 # Descriptive statistics for numeric columns
 print(df.describe())
 
-# Show the top 10 records sorted by a column (e.g. "Age")
-print(df.sort_values(by="Age", ascending=False).head(10))</pre></div>
+# Show the 10 heaviest penguins
+print(df.sort_values(by="body_mass_g", ascending=False).head(10))</pre></div>
     </div>
   </div>
-  <aside class="notes">This is the first-five-minutes checklist for any dataset: head, shape, columns, info, describe, then sort to see the extremes. Ask your team whether they did this before anyone trained a model. Side note: df.info() prints on its own, so wrapping it in print() also shows "None".</aside>
+  <aside class="notes">This is the first-five-minutes checklist for any dataset: head, shape, columns, info, describe, then sort to see the extremes. Make it a habit: do this before any analysis or model. Side note: df.info() prints on its own, so wrapping it in print() also shows "None".</aside>
+</section>
+
+<!-- ================================================= PANDAS · SELECT / FILTER / GROUP -->
+<section class="slide" data-mod="Module 05 · Pandas" style="--acc:var(--m5)">
+  <div class="main">
+    <div class="head">
+      <div class="kicker" style="color:var(--m5)">05<span class="sep">·</span>Pandas<span class="sep">/</span>select, filter, group</div>
+      <h2>Select, filter, group: <span class="hl">ask the table a question</span></h2>
+    </div>
+    <div class="cols" style="grid-template-columns:1fr 1fr;gap:32px">
+      <div class="stack" style="gap:18px">
+        <p class="lead" style="font-size:18px">Questions about data become one-liners: <strong>pick columns</strong>, <strong>keep the rows that match</strong>, add a column, then <strong>group and summarize</strong>. No loop in sight.</p>
+        <div><div class="label blue">Why it matters for AI &amp; data</div>
+          <ul class="b" style="--acc:var(--m5)"><li>This is how the features for a machine-learning model are built: filtered rows, new columns, group averages.</li></ul></div>
+        <div class="call g push"><span class="tag">GOTCHA</span><div>Combine conditions with <code class="i">&amp;</code> and <code class="i">|</code>, each in <strong>brackets</strong>. Using <code class="i">and</code> / <code class="i">or</code> on columns raises a <code class="i">ValueError</code>.</div></div>
+      </div>
+      <div class="stack" style="gap:14px">
+        <div class="term xs"><div class="bar"><i></i><i></i><i></i><span>05_pandas.ipynb</span></div>
+<pre class="py numbered" style="font-size:13.4px">cols = df[["species", "island", "body_mass_g"]]  # select
+heavy = df[df["body_mass_g"] &gt; 5000]     # filter: 61 rows
+gentoo_f = df[(df["species"] == "Gentoo") &amp; (df["sex"] == "FEMALE")]
+
+df["mass_kg"] = df["body_mass_g"] / 1000  # new column
+
+df.groupby("species")["body_mass_g"].mean().sort_values()</pre></div>
+        <div class="term out"><div class="bar"><span style="margin:0">output · mean body mass by species (g)</span></div>
+          <div style="padding:10px 14px 12px">
+            <div class="bars" style="grid-template-columns:78px 1fr 48px">
+              <span class="w">Adelie</span><span class="bar" style="--i:0;width:73%;background:var(--m5)"></span><span class="val" style="--i:0">3,701</span>
+              <span class="w">Chinstrap</span><span class="bar" style="--i:1;width:73.5%;background:var(--m5)"></span><span class="val" style="--i:1">3,733</span>
+              <span class="w">Gentoo</span><span class="bar" style="--i:2;width:100%;background:var(--yellow)"></span><span class="val" style="--i:2">5,076</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Same penguins table. Each line is one question: which columns, which rows, what new measure. The last line answers a real question in a single expression: which species is the heaviest? Gentoo, at about 5 kg on average, while Adelie and Chinstrap are almost the same at 3.7 kg.</aside>
 </section>
 
 <!-- ================================================= 20 DIVIDER 04 -->
-<section class="slide" data-mod="Module 04 · Data Visualization" style="--acc:var(--m4)">
-  <canvas class="rain" data-set="4" aria-hidden="true"></canvas>
+<section class="slide" data-mod="Module 06 · Data Visualization" style="--acc:var(--m6)" data-id="visualization">
+  <canvas class="rain" data-set="6" aria-hidden="true"></canvas>
   <div class="main">
     <div class="divider">
       <div>
-        <div class="mono-num">04</div>
-        <div class="kicker" style="color:var(--m4)">Module 04 / 04<span class="sep">·</span>Show</div>
+        <div class="mono-num">06</div>
+        <div class="kicker" style="color:var(--m6)">Module 06 / 06<span class="sep">·</span>Show</div>
         <h1 style="font-size:70px">Data <span class="hl">Visualization</span></h1>
         <p class="lead" style="margin-top:20px">Seaborn and Matplotlib.</p>
       </div>
       <div class="card" style="padding:26px 28px">
         <div class="label">The journey</div>
-        <div class="tracker" data-stage="4"></div>
+        <div class="tracker" data-stage="6"></div>
         <div style="margin-top:22px">
           <div style="font-weight:800;font-size:19px;margin-bottom:8px">Numbers in a table inform. A chart persuades.</div>
-          <p class="body">Decision-makers don't read 244 rows. They read shapes, rankings and gaps. Visualization turns the analysis into an argument.</p>
+          <p class="body">Nobody reads 244 rows. People read shapes, rankings and gaps. Visualization turns your analysis into something anyone understands at a glance.</p>
+          <div class="nb">▶ <a href="https://github.com/the-ai-learning-hub/01-python-as-ai-first-steps/tree/main/notebooks/06_Data_Visualization" target="_blank" rel="noopener"><span>notebooks/06_Data_Visualization</span></a> &nbsp;·&nbsp; 📚 <a href="https://www.w3schools.com/python/matplotlib_intro.asp" target="_blank" rel="noopener">W3Schools</a></div>
         </div>
       </div>
     </div>
   </div>
-  <aside class="notes">Module four. We close the loop: from raw data to a picture someone can decide on. Our dataset this time is a piece of raw text.</aside>
+  <aside class="notes">Module six. We close the loop: from raw data to a picture anyone can understand. Our dataset this time is a piece of raw text.</aside>
 </section>
 
 <!-- ================================================= 21 ESCAPE -->
-<section class="slide" data-mod="Module 04 · Data Visualization" style="--acc:var(--m4)">
+<section class="slide" data-mod="Module 06 · Data Visualization" style="--acc:var(--m6)">
   <div class="main">
     <div class="head">
-      <div class="kicker" style="color:var(--m4)">04<span class="sep">·</span>Visualization<span class="sep">/</span>raw text in</div>
+      <div class="kicker" style="color:var(--m6)">06<span class="sep">·</span>Visualization<span class="sep">/</span>raw text in</div>
       <h2>Text is data too: <span class="hl">read its hidden characters</span></h2>
     </div>
     <div class="cols">
       <div class="stack" style="gap:18px">
         <p class="lead" style="font-size:17.5px">In a string, sequences starting with a <strong>backslash</strong> (<code class="i">\</code>) are <strong>escape sequences</strong>. They stand for invisible characters like line breaks (<code class="i">\n</code>) and tabs (<code class="i">\t</code>), or let you put quotes inside a string.</p>
         <div><div class="label blue">Why it matters for AI &amp; data</div>
-          <ul class="b" style="--acc:var(--m4)"><li>Raw text (reviews, emails, transcripts) feeds most AI language work. This excerpt is the dataset we chart next.</li>
+          <ul class="b" style="--acc:var(--m6)"><li>Raw text (reviews, emails, transcripts) feeds most AI language work. This excerpt is the dataset we chart next.</li>
           <li>Clean <code class="i">\n</code>, <code class="i">\t</code> and stray quotes before counting words.</li></ul></div>
         <div class="call g push"><span class="tag">GOTCHA</span><div>In <code class="i">"C:\new\data.csv"</code>, the <code class="i">\n</code> becomes a line break. Use a raw string <code class="i">r"C:\new\data.csv"</code> or forward slashes.</div></div>
       </div>
@@ -956,10 +1556,10 @@ print(df.sort_values(by="Age", ascending=False).head(10))</pre></div>
 </section>
 
 <!-- ================================================= 22 LIBS -->
-<section class="slide" data-mod="Module 04 · Data Visualization" style="--acc:var(--m4)">
+<section class="slide" data-mod="Module 06 · Data Visualization" style="--acc:var(--m6)">
   <div class="main">
     <div class="head">
-      <div class="kicker" style="color:var(--m4)">04<span class="sep">·</span>Visualization<span class="sep">/</span>the two libraries</div>
+      <div class="kicker" style="color:var(--m6)">06<span class="sep">·</span>Visualization<span class="sep">/</span>the two libraries</div>
       <h2>Matplotlib gives control; <span class="hl">Seaborn gives speed</span></h2>
     </div>
     <p class="lead" style="max-width:none;margin-bottom:22px">Both draw charts from your data. <strong>Matplotlib</strong> is the base library; <strong>Seaborn</strong> is built on top of it and focuses on statistical graphics.</p>
@@ -970,14 +1570,14 @@ print(df.sort_values(by="Age", ascending=False).head(10))</pre></div>
         <ul class="b"><li>Very <strong>flexible and customizable</strong></li><li>Can create practically <strong>any type of chart</strong></li><li>Needs <strong>more lines of code</strong> for advanced setups</li><li>Ideal for <strong>highly customized, detailed</strong> charts</li></ul>
       </div>
       <div class="card" style="padding:22px 24px">
-        <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:6px"><span class="wordmark" style="color:var(--m4)">seaborn</span><span class="pill ghost">uv add seaborn</span></div>
+        <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:6px"><span class="wordmark" style="color:var(--m6)">seaborn</span><span class="pill ghost">uv add seaborn</span></div>
         <p class="body" style="margin-bottom:14px">Built on Matplotlib, focused on statistical charts.</p>
-        <ul class="b" style="--acc:var(--m4)"><li><strong>Simple, concise</strong> syntax</li><li><strong>Elegant, modern</strong> design by default</li><li>Makes complex charts easy: <strong>boxplots, violin plots, heatmaps</strong></li><li>Excellent for <strong>exploratory analysis</strong> and fast presentation</li></ul>
+        <ul class="b" style="--acc:var(--m6)"><li><strong>Simple, concise</strong> syntax</li><li><strong>Elegant, modern</strong> design by default</li><li>Makes complex charts easy: <strong>boxplots, violin plots, heatmaps</strong></li><li>Excellent for <strong>exploratory analysis</strong> and fast presentation</li></ul>
       </div>
     </div>
     <div class="row" style="margin-top:auto;align-items:stretch">
       <div style="flex:1"><div class="label blue">Why it matters for AI &amp; data</div>
-        <ul class="b" style="--acc:var(--m4)"><li>Use Seaborn to scan a dataset in minutes; switch to Matplotlib when a board-ready chart needs exact control.</li></ul></div>
+        <ul class="b" style="--acc:var(--m6)"><li>Use Seaborn to scan a dataset in minutes; switch to Matplotlib when a final chart needs exact control.</li></ul></div>
       <div class="call t" style="flex:1"><span class="tag">TAKEAWAY</span><div>They are layers of one stack, not rivals: Seaborn charts <strong>are</strong> Matplotlib charts underneath.</div></div>
     </div>
   </div>
@@ -985,10 +1585,10 @@ print(df.sort_values(by="Age", ascending=False).head(10))</pre></div>
 </section>
 
 <!-- ================================================= 23 CHARTS -->
-<section class="slide" data-mod="Module 04 · Data Visualization" style="--acc:var(--m4)">
+<section class="slide" data-mod="Module 06 · Data Visualization" style="--acc:var(--m6)">
   <div class="main">
     <div class="head" style="margin-bottom:14px">
-      <div class="kicker" style="color:var(--m4)">04<span class="sep">·</span>Visualization<span class="sep">/</span>from counts to chart</div>
+      <div class="kicker" style="color:var(--m6)">06<span class="sep">·</span>Visualization<span class="sep">/</span>from counts to chart</div>
       <h2>Same data, two charts: <span class="hl">which story lands faster?</span></h2>
     </div>
     <p class="lead" style="max-width:none;margin-bottom:16px;font-size:17.5px">Both show the <strong>top 10 most frequent words</strong> in the original Portuguese text of <em>Dom Casmurro</em> (English meaning in grey). The Matplotlib version is unsorted; the Seaborn version is <strong>sorted, colored and labeled</strong>.</p>
@@ -1004,7 +1604,7 @@ print(df.sort_values(by="Age", ascending=False).head(10))</pre></div>
     </div>
     <div class="row" style="margin-top:auto;align-items:stretch">
       <div style="flex:1"><div class="label blue">Why it matters for AI &amp; data</div>
-        <ul class="b" style="--acc:var(--m4)"><li>Sorting plus value labels lets an executive read the answer in two seconds: the bar for any AI result you present.</li></ul></div>
+        <ul class="b" style="--acc:var(--m6)"><li>Sorting plus value labels let anyone read the answer in two seconds: the bar for any result you present.</li></ul></div>
       <div class="call g" style="flex:1"><span class="tag">GOTCHA</span><div>The top words are "que", "e", "não" (that, and, not): grammar, not insight. Remove <strong>stop words</strong> before counting.</div></div>
     </div>
   </div>
@@ -1015,38 +1615,70 @@ print(df.sort_values(by="Age", ascending=False).head(10))</pre></div>
 <section class="slide" data-mod="Wrap-up">
   <div class="main">
     <div class="head">
-      <div class="kicker">05<span class="sep">·</span>Wrap-up</div>
-      <h2>From raw variables to a <span class="hl">decision-ready chart</span></h2>
+      <div class="kicker">07<span class="sep">·</span>Wrap-up</div>
+      <h2>From your first variable to <span class="hl">your first chart</span></h2>
     </div>
-    <div class="steps" style="flex:1;margin-bottom:20px">
-      <div class="step" style="--acc:var(--m1)"><div class="big">01</div><div class="mod">Store</div>
-        <div class="label" style="margin:6px 0 0">You can now</div><div class="body">Choose list, tuple, set or dict, and know when each fits.</div>
-        <div class="label" style="margin:auto 0 0">Ask your team</div><div class="q" style="color:var(--ink)">Is this the right container for how we'll use the data?</div></div>
-      <div class="step" style="--acc:var(--m2)"><div class="big">02</div><div class="mod">Repeat</div>
-        <div class="label" style="margin:6px 0 0">You can now</div><div class="body">Tell while from for, and avoid infinite loops.</div>
-        <div class="label" style="margin:auto 0 0">Ask your team</div><div class="q" style="color:var(--ink)">Which manual, repeated step could a loop automate?</div></div>
-      <div class="step" style="--acc:var(--m3)"><div class="big">03</div><div class="mod">Tabulate</div>
-        <div class="label" style="margin:6px 0 0">You can now</div><div class="body">Load, inspect and sort any table.</div>
-        <div class="label" style="margin:auto 0 0">Ask your team</div><div class="q" style="color:var(--ink)">Did we check shape, types and missing values first?</div></div>
-      <div class="step" style="--acc:var(--m4)"><div class="big">04</div><div class="mod">Show</div>
-        <div class="label" style="margin:6px 0 0">You can now</div><div class="body">Use Matplotlib for control and Seaborn for speed.</div>
-        <div class="label" style="margin:auto 0 0">Ask your team</div><div class="q" style="color:var(--ink)">Does the chart answer the question in two seconds?</div></div>
+    <div class="steps six wrap" style="flex:1;margin-bottom:16px">
+      <div class="step" style="--acc:var(--m1)"><div class="big">01</div><div class="mod">Basics</div>
+        <div class="body">Use variables, types, operators, functions, strings and <code class="i">if</code>.</div>
+        <div class="q">Check yourself: why does <code class="i">"5" + "5"</code> give <code class="i">"55"</code>?</div></div>
+      <div class="step" style="--acc:var(--m2)"><div class="big">02</div><div class="mod">Store</div>
+        <div class="body">Choose list, tuple, set or dict, and know when each fits.</div>
+        <div class="q">Check yourself: which one removes duplicates?</div></div>
+      <div class="step" style="--acc:var(--m3)"><div class="big">03</div><div class="mod">Repeat</div>
+        <div class="body">Pick while or for, steer them with break and continue.</div>
+        <div class="q">Check yourself: what does <code class="i">range(3)</code> produce?</div></div>
+      <div class="step" style="--acc:var(--m4)"><div class="big">04</div><div class="mod">Reuse</div>
+        <div class="body">Import modules, handle errors and write simple classes.</div>
+        <div class="q">Check yourself: which line of a traceback do you read first?</div></div>
+      <div class="step" style="--acc:var(--m5)"><div class="big">05</div><div class="mod">Tabulate</div>
+        <div class="body">Load, inspect, filter and group any table.</div>
+        <div class="q">Check yourself: <code class="i">df["a"]</code> or <code class="i">df[["a"]]</code>?</div></div>
+      <div class="step" style="--acc:var(--m6)"><div class="big">06</div><div class="mod">Show</div>
+        <div class="body">Chart with Matplotlib for control and Seaborn for speed.</div>
+        <div class="q">Check yourself: does your chart answer its question in two seconds?</div></div>
     </div>
-    <div class="term out"><pre style="padding:14px 18px"><span class="p">&gt;</span> next_in_series  <span style="color:var(--m4);font-weight:700">ML Models</span>  <span style="color:var(--muted)">&lt; Classification and Regression &gt;</span></pre></div>
+    <div class="term out"><pre style="padding:12px 18px"><span class="p">&gt;</span> code .  <span style="color:var(--muted)">→ open</span> <span style="color:var(--yellow);font-weight:700">notebooks/</span> <span style="color:var(--muted)">in VS Code, do the exercises ·  next lesson:</span> <span style="color:var(--m6);font-weight:700">ML Models</span></pre></div>
   </div>
-  <aside class="notes">Four moves, four questions you can now ask any data or AI team. Next in the series: machine-learning models, classification and regression.</aside>
+  <aside class="notes">Six moves, and a quick self-check question for each. If you can answer all six, you are ready for the notebooks' final exercises. Every notebook has hints and hidden solutions: try first, then compare. Next in the series: machine-learning models, classification and regression.</aside>
 </section>
 
 <!-- ================================================= 25 THANKS -->
 <section class="slide" data-mod="Thank you">
   <canvas class="rain soft" data-set="0" aria-hidden="true"></canvas>
   <div class="main" style="justify-content:center">
-    <div class="kicker">AI for Tech Leaders<span class="sep">·</span>Lesson 01 complete</div>
+    <div class="kicker">The AI Learning Hub<span class="sep">·</span>Lesson 01 complete</div>
     <h1 style="font-size:120px">Thank <span class="hl">you</span>.</h1>
     <p class="lead" style="margin-top:28px;font-size:21px">Made by <strong>Diogo Freitas</strong> &amp; <strong>João Francisco Botas</strong></p>
-    <div class="pills" style="margin-top:22px"><span class="pill">Questions?</span><span class="pill y">01-python-as-ai-first-steps</span></div>
+    <div class="pills" style="margin-top:22px"><span class="pill">Questions?</span><a class="pill y" href="https://github.com/the-ai-learning-hub/01-python-as-ai-first-steps">github.com/the-ai-learning-hub/01-python-as-ai-first-steps</a></div>
+    <p class="body" style="margin-top:26px;max-width:62ch">Keep practising: the six notebooks hold every example from these slides, plus exercises with solutions. For extra reading, <a class="lnk" href="https://www.w3schools.com/python/" target="_blank" rel="noopener">W3Schools Python</a> covers each topic with try-it-yourself examples.</p>
   </div>
-  <aside class="notes">Thank you. Questions?</aside>
+  <aside class="notes">Thank you. Questions? Point everyone to the repository: notebooks for practice, and W3Schools for a second explanation of any topic.</aside>
+</section>
+
+<!-- ================================================= APPENDIX · GLOSSARY -->
+<section class="slide" data-mod="Appendix" data-id="glossary" style="--acc:var(--blue)">
+  <div class="main">
+    <div class="head" style="margin-bottom:20px">
+      <div class="kicker">Appendix<span class="sep">/</span>glossary</div>
+      <h2>Twelve words, in plain English</h2>
+    </div>
+    <dl class="gloss">
+      <div><dt>Code</dt><dd>Instructions for the computer, written in a language like Python.</dd></div>
+      <div><dt>Terminal</dt><dd>A window where you type commands instead of clicking.</dd></div>
+      <div><dt>Variable</dt><dd>A name that stores a value, like <code class="i">age = 20</code>.</dd></div>
+      <div><dt>Notebook</dt><dd>A document that mixes text and code you can run piece by piece.</dd></div>
+      <div><dt>Function</dt><dd>A named recipe: give it inputs, it returns a result.</dd></div>
+      <div><dt>Library</dt><dd>Code other people wrote that you can <code class="i">import</code> and reuse.</dd></div>
+      <div><dt>Loop</dt><dd>Repeats the same steps for every item, or until a condition stops it.</dd></div>
+      <div><dt>Error</dt><dd>Python's message that something went wrong, and where.</dd></div>
+      <div><dt>Class / object</dt><dd>A blueprint, and the things built from it.</dd></div>
+      <div><dt>DataFrame</dt><dd>A table of rows and columns inside Python, like a spreadsheet.</dd></div>
+      <div><dt>Dataset</dt><dd>A collection of data, usually a table saved in a file.</dd></div>
+      <div><dt>AI agent</dt><dd>An AI that doesn't just answer: it writes and runs code for you.</dd></div>
+    </dl>
+  </div>
+  <aside class="notes">A reference for anyone new to programming. Every one of these words appears in the lesson; come back here whenever one feels unclear.</aside>
 </section>
 
 <!-- ================================================= 26-28 APPENDIX -->
@@ -1057,8 +1689,8 @@ print(df.sort_values(by="Age", ascending=False).head(10))</pre></div>
       <h2>Reference: list and tuple methods</h2>
     </div>
     <div class="figs">
-      <figure><img src="assets/list-methods.jpeg" alt="Python list methods cheat sheet" style="max-height:420px"></figure>
-      <figure><img src="assets/tuple-methods.png" alt="Tuple methods cheat sheet" style="max-height:420px">
+      <figure><img src="assets/slides/list-methods.jpeg" alt="Python list methods cheat sheet" style="max-height:420px"></figure>
+      <figure><img src="assets/slides/tuple-methods.png" alt="Tuple methods cheat sheet" style="max-height:420px">
         </figure>
     </div>
     <p style="text-align:center;font-size:14px;color:var(--muted);margin-top:12px">Note: tuples are immutable and have no <code class="i">.sort()</code> method. Use <code class="i">sorted(t)</code>, which returns a new list.</p>
@@ -1073,8 +1705,8 @@ print(df.sort_values(by="Age", ascending=False).head(10))</pre></div>
       <h2>Reference: set and dictionary methods</h2>
     </div>
     <div class="figs">
-      <figure><img src="assets/set-methods.jpeg" alt="Python set methods cheat sheet" style="max-height:470px"></figure>
-      <figure><img src="assets/dict-methods.png" alt="Dictionary methods cheat sheet" style="max-height:470px"></figure>
+      <figure><img src="assets/slides/set-methods.jpeg" alt="Python set methods cheat sheet" style="max-height:470px"></figure>
+      <figure><img src="assets/slides/dict-methods.png" alt="Dictionary methods cheat sheet" style="max-height:470px"></figure>
     </div>
   </div>
   <aside class="notes">Reference slide from the original Data Structures module.</aside>
@@ -1086,7 +1718,7 @@ print(df.sort_values(by="Age", ascending=False).head(10))</pre></div>
       <div class="kicker" style="color:var(--yellow)">Appendix<span class="sep">/</span>cheat sheet</div>
       <h2>Reference: the Pandas data-wrangling cheat sheet</h2>
     </div>
-    <div class="figs"><figure><img src="assets/pandas-cheat-sheet.png" alt="Pandas data wrangling cheat sheet" style="max-height:480px"></figure></div>
+    <div class="figs"><figure><img src="assets/slides/pandas-cheat-sheet.png" alt="Pandas data wrangling cheat sheet" style="max-height:480px"></figure></div>
   </div>
   <aside class="notes">Reference slide from the original Pandas module: the official pandas data-wrangling cheat sheet.</aside>
 </section>
@@ -1105,7 +1737,7 @@ print(df.sort_values(by="Age", ascending=False).head(10))</pre></div>
 <script>
 (function () {
   // ---------- syntax highlighting for <pre class="py">
-  var KW = /^(for|in|while|import|as|if|else|elif|def|return|del|not|and|or|from)$/;
+  var KW = /^(for|in|while|import|as|if|else|elif|def|return|del|not|and|or|from|class|try|except|finally|raise|with|break|continue|pass|lambda|is|match|case)$/;
   var CONST = /^(True|False|None)$/;
   var TOK = /(#.*)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')|(\b\d+(?:\.\d+)?\b)|([A-Za-z_][\w]*)|([=+\-*/<>|&!%]+)|(\s+)|(.)/g;
   function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
@@ -1137,10 +1769,12 @@ print(df.sort_values(by="Age", ascending=False).head(10))</pre></div>
   });
 
   // ---------- journey trackers
-  var MODS = [["01", "Store", "Data Structures", "var(--m1)"], ["02", "Repeat", "Loops", "var(--m2)"],
-              ["03", "Tabulate", "Pandas", "var(--m3)"], ["04", "Show", "Data Visualization", "var(--m4)"]];
+  var MODS = [["01", "Basics", "Python Basics", "var(--m1)"], ["02", "Store", "Data Structures", "var(--m2)"],
+              ["03", "Repeat", "Loops", "var(--m3)"], ["04", "Reuse", "Modules · Errors · Classes", "var(--m4)"],
+              ["05", "Tabulate", "Pandas", "var(--m5)"], ["06", "Show", "Data Visualization", "var(--m6)"]];
   document.querySelectorAll(".tracker").forEach(function (t) {
     var stage = +t.dataset.stage;
+    t.classList.add("six");
     t.innerHTML = MODS.map(function (m, i) {
       var st = i + 1 < stage ? "done" : i + 1 === stage ? "now" : "";
       return '<div class="t ' + st + '" style="--acc:' + m[3] + '"><span class="dot">' + m[0] + "</span><span>" +
@@ -1165,7 +1799,8 @@ print(df.sort_values(by="Age", ascending=False).head(10))</pre></div>
 
   // ---------- staggered entrances
   var RV = ".kicker,h1,h2,.lead,.label,ul.b>li,ol.n>li,.term,.call,table.t,table.df,.step,.flow .s,.figs figure," +
-           ".pills .pill,.mini>.card,.cols>.stack>.card,.tracker .t,.divider .card,.caption,.idx,.kv>span,.row>div>ul,.mono-num";
+           ".pills .pill,.mini>.card,.cols>.stack>.card,.tracker .t,.divider .card,.caption,.idx,.kv>span,.row>div>ul,.mono-num," +
+           ".msg,.risk,.check,.gloss>div";
   document.querySelectorAll(".slide").forEach(function (sl) {
     var n = 0;
     sl.querySelectorAll(RV).forEach(function (el) {
@@ -1209,14 +1844,16 @@ print(df.sort_values(by="Age", ascending=False).head(10))</pre></div>
   // ---------- falling code: each module rains its own key functions
   var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var WORDS = {
-    0: ["import pandas as pd", "uv run", "print()", "for", "dict", "list", "df.head()", "sns.barplot()", "range()", "def"],
-    1: ["list()", "tuple()", "set()", "dict()", ".append()", ".remove()", ".add()", ".get()", ".keys()",
+    0: ["import pandas as pd", "uv run", "print()", "for", "dict", "list", "df.head()", "sns.barplot()", "range()", "def", "class", "try:"],
+    1: ["x = 42", "type()", "int()", "float()", "str()", "def", "return", "f\"{x}\"", ".upper()", "if", "elif", "else", "and", "or", "not", "%", "//"],
+    2: ["list()", "tuple()", "set()", "dict()", ".append()", ".remove()", ".add()", ".get()", ".keys()",
         ".values()", ".items()", "len()", "x[0]", "{k: v}", "in"],
-    2: ["for", "while", "range()", "in", "break", "continue", "enumerate()", "zip()", "+= 1", "print()", "if", "else"],
-    3: ["pd.read_csv()", "df.head()", "df.shape", "df.info()", "df.describe()", ".sort_values()", ".groupby()",
-        "df[\"tip\"]", ".isna()", ".merge()", ".value_counts()", "import pandas as pd"],
-    4: ["plt.barh()", "sns.barplot()", "plt.show()", "sns.boxplot()", "sns.heatmap()", "plt.title()",
-        "Counter()", ".split()", "\\n", "\\t", "uv add seaborn", "plt.figure()"]
+    3: ["for", "while", "range()", "in", "break", "continue", "enumerate()", "zip()", "+= 1", "print()", "[x for x in]", "while True:"],
+    4: ["import", "from", "as", "try:", "except", "finally", "raise", "class", "__init__", "self", "json.loads()", "uv add", "math.sqrt()"],
+    5: ["pd.read_csv()", "df.head()", "df.shape", "df.info()", "df.describe()", ".sort_values()", ".groupby()",
+        "df[\"species\"]", ".isna()", ".merge()", ".value_counts()", "import pandas as pd", ".loc[]"],
+    6: ["plt.barh()", "sns.barplot()", "plt.show()", "sns.boxplot()", "sns.heatmap()", "plt.title()",
+        "Counter()", ".split()", "\n", "\t", "uv add seaborn", "plt.figure()"]
   };
   function Rain(cv, words) {
     var W = 1280, H = 720, R = 2, STEP = 17, ctx = cv.getContext("2d");
@@ -1348,7 +1985,14 @@ print(df.sort_values(by="Age", ascending=False).head(10))</pre></div>
   });
   window.addEventListener("resize", fit);
   fit();
-  show((parseInt(location.hash.slice(1), 10) || 1) - 1);
+  function fromHash() {
+    var h = decodeURIComponent(location.hash.slice(1)), n = parseInt(h, 10);
+    if (!isNaN(n) && String(n) === h) return n - 1;
+    for (var k = 0; k < N; k++) if (slides[k].dataset.id === h) return k;
+    return 0;
+  }
+  window.addEventListener("hashchange", function () { var k = fromHash(); if (k !== cur) show(k); });
+  show(fromHash());
 })();
 </script>
 </body>

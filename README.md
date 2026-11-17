@@ -1,115 +1,150 @@
-# 01 · Python as AI: First Steps
+# Lesson 1 · Python: first steps
 
-> **[AI for Tech Leaders]** — from raw variables to visual insights, in one continuous journey.
+**From your first variable to your first chart.** Part of [The AI Learning Hub](https://github.com/the-ai-learning-hub).
 
-A single, unified slide deck that takes technology and product leaders from *how Python holds data* to *a chart a board can act on*. It is built for people who build, buy or approve AI and data work. The aim is not to make you a developer. It is to show you what the code does to your data, so you can validate a hypothesis quickly, evaluate an AI solution and challenge the evidence behind a decision.
+📖 **[Open the Lesson 1 slides](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/)**. Use ← → to move between slides.
 
-| | |
-|---|---|
-| **Deck** | [`Python_as_AI_First_Steps.pptx`](./Python_as_AI_First_Steps.pptx) — 28 slides, 16:9 |
-| **Web deck** | [`html/index.html`](./html/index.html) — the same 28 slides as a browser presentation, with all examples in English |
-| **Audience** | Technology and product professionals, decision-makers |
-| **Format** | Live session or self-paced pre-read (every slide carries speaker notes) |
-| **Duration** | ~60–75 min live, incl. discussion |
-| **Prerequisites** | None to follow along. To run the examples: [uv](https://docs.astral.sh/uv/). It installs Python 3.12 and every library for you |
-| **Authors** | Diogo Freitas & João Francisco Botas |
+This lesson teaches the Python that every AI and data project is built on. It is for anyone learning Python: no programming or technical background is needed, only [Lesson 0](https://github.com/the-ai-learning-hub/00-environment-setup) (uv, VS Code and your first program).
+
+It has two parts: **the slides** explain each idea with one clear example, and **six notebooks** (in Portuguese 🇵🇹) let you run every example and practise with exercises that have hidden solutions.
 
 ---
 
-## The journey: four moves
+## Why learn the basics if AI can write code?
+
+An AI agent writes code fast and always sounds sure, but that code runs on **your** computer, with **your** files and **your** data. One wrong line can delete a database, overwrite yesterday's spreadsheet, loop all night calling a paid service, or quietly give a wrong answer that looks right.
+
+You don't need to write every line yourself. You need to **understand every line you run**. The lesson opens with this ([slides 2–4](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#why)) and a checklist to use before approving any code:
+
+| Before you press Enter, ask… | You learn it in |
+|---|---|
+| What does it do? | 01 · Basics |
+| What data does it touch? | 02 · Data Structures · 05 · Pandas |
+| Can it delete or overwrite? | 06 · Data Visualization (files) |
+| How long will it run? | 03 · Loops |
+| What happens if it fails? | 04 · Modules, Errors & Classes |
+
+---
+
+## The journey: six moves
 
 Each module answers the question the previous one leaves open.
 
 ```mermaid
 flowchart LR
-    A["01 · STORE<br/>Data Structures<br/><i>How is data stored?</i>"] --> B["02 · REPEAT<br/>Loops<br/><i>How do we automate repetition?</i>"]
-    B --> C["03 · TABULATE<br/>Pandas<br/><i>How do we work with tables at scale?</i>"]
-    C --> D["04 · SHOW<br/>Data Visualization<br/><i>How do we make the insight obvious?</i>"]
+    A["01 · BASICS<br/>Python Basics"] --> B["02 · STORE<br/>Data Structures"]
+    B --> C["03 · REPEAT<br/>Loops"]
+    C --> D["04 · REUSE<br/>Modules, Errors & Classes"]
+    D --> E["05 · TABULATE<br/>Pandas"]
+    E --> F["06 · SHOW<br/>Data Visualization"]
 ```
 
-| Move | Module | The question it answers | Bridge to the next module |
-|---|---|---|---|
-| **01 · Store** | Data Structures | How is data stored in Python? | *You can store data. Now make it work at scale.* |
-| **02 · Repeat** | Loops | How do we automate repetition? | *Loops scale your logic. Tables scale your data.* |
-| **03 · Tabulate** | Pandas | How do we work with tables at scale? | *Numbers in a table inform. A chart persuades.* |
-| **04 · Show** | Data Visualization | How do we make the insight obvious? | *Next in the series: ML Models (classification and regression).* |
+| # | Module | The question | Slides | Notebook | Exercises | 📚 Read more |
+|---|---|---|---|---|---|---|
+| 01 | **Basics** | How do I tell Python what to do? | [7–12](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#basics) | [01_Python_Basics](notebooks/01_Python_Basics/01_Python_Basics.ipynb) | 24 | [W3Schools](https://www.w3schools.com/python/python_variables.asp) |
+| 02 | **Store** | How is data stored in Python? | [13–19](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#data-structures) | [02_Data_Structures](notebooks/02_Data_Structures/02_Data_Structures.ipynb) | 17 | [W3Schools](https://www.w3schools.com/python/python_lists.asp) |
+| 03 | **Repeat** | How do we automate repetition? | [20–24](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#loops) | [03_Loops](notebooks/03_Loops/03_Loops.ipynb) | 17 | [W3Schools](https://www.w3schools.com/python/python_for_loops.asp) |
+| 04 | **Reuse** | How do we reuse and protect code? | [25–28](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#reuse) | [04_Modules_Errors_Classes](notebooks/04_Modules_Errors_Classes/04_Modules_Errors_Classes.ipynb) | 13 | [W3Schools](https://www.w3schools.com/python/python_classes.asp) |
+| 05 | **Tabulate** | How do we work with tables at scale? | [29–34](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#pandas) | [05_Pandas](notebooks/05_Pandas/05_Pandas.ipynb) | 24 | [W3Schools](https://www.w3schools.com/python/pandas/default.asp) |
+| 06 | **Show** | How do we make the result obvious? | [35–38](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#visualization) | [06_Data_Visualization](notebooks/06_Data_Visualization/06_Data_Visualization.ipynb) | 14 | [W3Schools](https://www.w3schools.com/python/matplotlib_intro.asp) |
+
+Slide 1 is the cover, 2–4 explain why the basics matter, 5–6 show the journey, 39–40 wrap up, 41 is a **glossary of 12 words in plain English**, and 42–44 are reference cheat sheets.
 
 ---
 
-## Deck structure
+## What you will be able to do
 
-| Slides | Section | Content |
-|---|---|---|
-| 1–3 | **Introduction** | Title · the four-move journey · why every AI product runs on these moves |
-| 4–10 | **01 · Data Structures** | Divider · container comparison (list / tuple / set / dict) · zero-indexing and core concepts · `list` · `tuple` · `set` · `dict` |
-| 11–14 | **02 · Loops** | Divider · why loops · `while` (conditional loop) · `for` (sequential loop over a range, a string and a list) |
-| 15–19 | **03 · Pandas** | Divider · what Pandas is · `Series` vs `DataFrame` (the `tips` dataset) · reading data · six inspection commands |
-| 20–23 | **04 · Data Visualization** | Divider · raw text and escape sequences · Matplotlib vs Seaborn · the same top-10 word-frequency data charted both ways |
-| 24–25 | **Wrap-up** | What you can now do, and what to ask your team · thank you |
-| 26–28 | **Appendix** | Reference cheat sheets: list & tuple methods · set & dict methods · Pandas data wrangling |
+**01 · Basics**: create variables and convert between types (`int`, `float`, `str`, `bool`, `None`); use arithmetic, comparison and logical operators; write functions with parameters, defaults and `return`; slice and format strings with f-strings; make decisions with `if` / `elif` / `else` and `match`.
 
-The deck is organized into PowerPoint **sections** that match this table, so each module can be presented on its own.
+**02 · Store**: choose between `list`, `tuple`, `set` and `dict` based on order, mutability, duplicates and lookups; avoid off-by-one errors with zero-based indexing; read nested data like an API or LLM reply (JSON).
 
-### Slide anatomy
+**03 · Repeat**: choose `while` (unknown count) or `for` (known sequence); use `range`, `enumerate`, `zip`, `break` and `continue`; write list and dict comprehensions; avoid infinite loops; build the classic Hangman game step by step.
 
-Every content slide follows the same rhythm, so the audience always knows where to look:
+**04 · Reuse**: import the standard library (`math`, `random`, `datetime`, `json`, `collections`…) and third-party libraries (`uv add`); write your own module; read a traceback and handle errors with `try` / `except` / `raise`; write classes with attributes, methods, inheritance and `@dataclass`.
 
-1. **Action title**: the insight, not the topic (*"Sets: kill duplicates, compare groups instantly"*).
-2. **Core concept**: one plain-language sentence explaining the mechanism.
-3. **Why it matters for AI & data**: 1–2 bullets on practical impact.
-4. **Code + output**: the original example, shown as live, syntax-highlighted text.
-5. **Gotcha / Key takeaway**: one high-contrast callout with a real-world pitfall or best practice.
+**05 · Tabulate**: learn pandas as a penguin researcher in Antarctica (**Palmer Penguins**): build a `Series` and a `DataFrame`, load a CSV, inspect it in five minutes, select with `loc` / `iloc`, filter, clean missing values and duplicates, add columns, `groupby` and summarize. Then investigate the **Titanic** on your own: who survived, and why? An optional extra challenge uses real, messy data (a catalogue of 1,006 classic books).
 
-Section dividers show a **journey tracker** (where you are, what's done, what's next) and a one-paragraph narrative bridge. The editor-style tab bar at the top of every slide highlights the active module.
+**06 · Show**: read and write text files safely; count words and remove stop words; draw bar, line, pie, scatter, histogram, box and violin plots with Matplotlib and Seaborn; then **import your own chart module** (`graficos.py`) to make publication-quality charts in one line, and analyse the novel *Dom Casmurro*.
 
----
+### Publication-quality charts with `graficos.py`
 
-## Key learning outcomes
+Notebook 06 comes with [`graficos.py`](notebooks/06_Data_Visualization/graficos.py), a small module that you import into the notebook (which also practises the imports from module 04):
 
-By the end of the session, participants can:
+```python
+from graficos import aplicar_tema, barras, dispersao, histograma, caixa, guardar
 
-**01 · Store**
-- Choose between `list`, `tuple`, `set` and `dict` based on order, mutability, duplicates and lookup needs.
-- Recognize that API payloads and LLM responses (JSON) are dictionaries and lists.
-- Avoid off-by-one errors by reasoning in zero-based indices.
+aplicar_tema()
+fig, ax = barras(sobrevivencia, titulo="97% das mulheres da 1.ª classe sobreviveram",
+                 destaque=["1.ª classe · mulher"])
+guardar(fig, "titanic_sobrevivencia")
+```
 
-**02 · Repeat**
-- Tell when a task is a loop, and choose `while` (unknown count, condition-driven) or `for` (known sequence).
-- Spot the classic failure modes: infinite loops, and `range()` stopping before its end value.
-
-**03 · Tabulate**
-- Explain the difference between a `Series` and a `DataFrame`, and why the DataFrame is the standard input for ML.
-- Load CSV, Excel, SQL or JSON data in one line, and run a first-five-minutes inspection (`head`, `shape`, `columns`, `info`, `describe`, `sort_values`).
-
-**04 · Show**
-- Pick Seaborn for fast exploration and Matplotlib for fine-grained control.
-- Judge whether a chart answers its question in seconds (sorted, labeled, cleaned of noise such as stop words).
-
-**As a leader**, participants leave with four questions to ask any data or AI team:
-
-> *Is this the right container for how we'll use the data?* · *Which manual, repeated step could a loop automate?* · *Did we check shape, types and missing values first?* · *Does the chart answer the question in two seconds?*
+Every function (`barras`, `linha`, `histograma`, `dispersao`, `caixa`, `donut`, `mapa_calor`, `nuvem_palavras`) gives a sorted, labelled, accessible chart with a title that states the conclusion, a colour-blind-safe palette, the Inter typeface and Portuguese number formatting. The last exercise asks you to add your own function to the module.
 
 ---
 
-## Presenting the deck
+## How to start
 
-- **Speaker notes** on every slide hold the talk track.
-- **Code examples** keep their original logic, variable names and data exactly as written (e.g. `frutas`, `aluno`, `"Vou estudar Python!"`). Code comments are translated to English; comments that show a printed result (e.g. `# banana`) are unchanged.
-- **Run the examples live** (optional). This folder is a member of the repository's uv workspace (see the root `README.md`). From the repository root, install exactly what this lesson needs:
+You need what you installed in [Lesson 0](https://github.com/the-ai-learning-hub/00-environment-setup): **uv**, **VS Code** (with the Python and Jupyter extensions) and **Git**.
 
-  ```bash
-  uv sync --package python-as-ai-first-steps
-  ```
+```bash
+git clone https://github.com/the-ai-learning-hub/01-python-as-ai-first-steps.git
+cd 01-python-as-ai-first-steps
+uv sync
+code .
+```
 
-  Then open the notebooks in `Data_Structures/`, `Loops/`, `Pandas/` and `Data_Visualization/` with the `.venv` kernel. To add a library to this lesson, run `uv add --package python-as-ai-first-steps <library>`.
+`uv sync` installs Python 3.12 and every library this lesson uses (pandas, matplotlib, seaborn, requests, wordcloud) into a local `.venv`.
 
-  Slide 17 loads Seaborn's built-in `tips` dataset (`sns.load_dataset('tips')`), so no local files are needed. Slide 19 reads `ficheiro_exemplo.csv`, which is a placeholder for any CSV of your own.
+In VS Code, open a notebook in `notebooks/`, click **Select Kernel** (top right) → **Python Environments** → **.venv**, then run each cell with `Shift` + `Enter`, in order.
+
+> **No installation?** Every notebook has an **Open in Colab** button at the top. It runs in your browser and downloads the data (and `graficos.py`) it needs.
+
+### How the notebooks work
+
+Every notebook follows the same structure, so you always know where to look:
+
+1. **🎯 Learning goals**, duration and prerequisites, then a clickable **index**.
+2. **Sections**: a short explanation → an example you run → tips (💡), common mistakes (⚠️) and links to AI (🤖).
+3. **📚 Read more**: each section ends with a link to the matching [W3Schools](https://www.w3schools.com/python/) page, for a second explanation and try-it-yourself examples.
+4. **✏️ Exercises** marked ⭐ (easy) to ⭐⭐⭐ (challenge), **109 in total**. Each one has a starter cell that already runs and a **💡 Ver solução** block. Try first, then compare.
+5. **🏋️ Practise more** and a **📌 Summary**: a one-table cheat sheet of the notebook.
+6. **Footer** with links to the previous and next notebook.
 
 ---
 
-### The web deck (`html/`)
+## Repository layout
 
-Open `html/index.html` in any modern browser. No build step or server is needed. Keep the `assets/` folder next to it, because it holds the appendix cheat sheets.
+```
+01-python-as-ai-first-steps/
+├── index.html                      ← the slides (served by GitHub Pages)
+├── assets/slides/                  ← cheat-sheet images used by the slides
+├── notebooks/
+│   ├── 01_Python_Basics/
+│   ├── 02_Data_Structures/
+│   ├── 03_Loops/
+│   ├── 04_Modules_Errors_Classes/
+│   │   └── utilidades.py           ← an example module you import
+│   ├── 05_Pandas/
+│   │   └── data/                   ← penguins.csv · titanic.csv · classics.csv (extra challenge)
+│   └── 06_Data_Visualization/
+│       ├── graficos.py             ← chart module you import
+│       ├── fonts/                  ← Inter typeface (SIL Open Font License)
+│       └── data/                   ← penguins.csv · titanic.csv · text.txt · dom_casmurro.txt
+├── tools/
+│   ├── run_notebooks.py            ← runs every notebook end to end
+│   └── audit_notebooks.py          ← checks structure, links and leftovers
+├── pyproject.toml · uv.lock        ← the lesson's dependencies
+└── .nojekyll · LICENSE · README.md
+```
+
+Each notebook folder is self-contained, so it also works on its own in Colab. Files the notebooks write (exercise outputs, saved charts) go to an `output/` folder inside each notebook folder, which Git ignores. The files in `data/` are never modified.
+
+---
+
+## The slides
+
+Open [the web slides](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/), or open `index.html` in any browser. No build step or server is needed.
 
 | Key | Action |
 |---|---|
@@ -118,12 +153,40 @@ Open `html/index.html` in any modern browser. No build step or server is needed.
 | `N` | Toggle speaker notes |
 | `F` | Fullscreen |
 
-Each slide has its own URL (`index.html#7`), and the browser's **Print → Save as PDF** gives one slide per page. In the web deck, the code examples are translated to English (e.g. `fruits`, `student`, `counter`), and the *Dom Casmurro* excerpt is shown in English translation. The word-frequency chart still counts the original Portuguese words, with their English meaning beside each one.
+Every slide has its own link: by number (`#7`) or, for the start of each part, by name: [`#why`](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#why), [`#journey`](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#journey), [`#basics`](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#basics), [`#data-structures`](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#data-structures), [`#loops`](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#loops), [`#reuse`](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#reuse), [`#pandas`](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#pandas), [`#visualization`](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#visualization) and [`#glossary`](https://the-ai-learning-hub.github.io/01-python-as-ai-first-steps/#glossary). Named links keep working when slides are added. **Print → Save as PDF** gives one slide per page.
+
+Every content slide follows the same pattern: an action title, one plain-language idea, *why it matters for AI & data*, a code example with its output, and a **gotcha** with a common mistake. Section dividers show where you are in the journey and link to the module's notebook and W3Schools page. Slides and code examples are in English; the notebooks are in Portuguese.
+
+---
+
+## For maintainers
+
+Run every notebook top to bottom and save the outputs (it fails on any unexpected error), then check structure, links and leftovers:
+
+```bash
+uv sync
+uv run python tools/run_notebooks.py                       # all notebooks
+uv run python tools/run_notebooks.py notebooks/03_Loops/03_Loops.ipynb
+uv run python tools/audit_notebooks.py
+```
+
+Cells that raise an error on purpose (to teach it) carry the cell tag `raises-exception`. To add a library: `uv add <library>`. When you add slides, link to them from notebooks by name (`#pandas`), not by number.
+
+**GitHub Pages**: *Settings → Pages → Deploy from a branch → `main` / `(root)`*. The slides are `index.html` at the root, and `.nojekyll` makes Pages serve the files as they are.
 
 ---
 
 ## Credits
 
 - Content and examples: Diogo Freitas & João Francisco Botas.
-- Visual theme adapted from a Slidesgo template.
-- Appendix cheat sheets are third-party references and keep their original attribution: list methods by @akshay_pachaar; the Pandas data-wrangling cheat sheet originally written by Irv Lustig, Princeton Consultants (pandas.pydata.org).
+- Further reading links: [W3Schools Python tutorial](https://www.w3schools.com/python/).
+- Datasets:
+  - [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/): Gorman, Williams & Fraser (2014), Palmer Station LTER (CC0), via the [seaborn-data](https://github.com/mwaskom/seaborn-data) repository.
+  - Titanic passenger data, via [seaborn-data](https://github.com/mwaskom/seaborn-data).
+  - [CORGIS Classics](https://corgis-edu.github.io/corgis/csv/classics/) (Project Gutenberg metadata).
+  - *Dom Casmurro* by Machado de Assis (1899), from [Project Gutenberg](https://www.gutenberg.org/ebooks/55752) (public domain).
+- Typeface: [Inter](https://rsms.me/inter/) by Rasmus Andersson, under the SIL Open Font License (see `notebooks/06_Data_Visualization/fonts/OFL.txt`).
+- Visual theme of the slides adapted from a Slidesgo template.
+- Appendix cheat sheets are third-party references and keep their original attribution: list methods by @akshay_pachaar; the pandas data-wrangling cheat sheet originally written by Irv Lustig, Princeton Consultants (pandas.pydata.org).
+
+Licensed under the [MIT License](LICENSE).
